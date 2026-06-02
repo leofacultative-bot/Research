@@ -864,10 +864,81 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
 
 <div class="toast" id="toast"></div>
 
-<script>
+<script type="module">
 // ═══════════════════════════════════
-//  STATE
+//  FIREBASE SETUP
 // ═══════════════════════════════════
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, set, get, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDVDjiK7vlT8S6b_U6TvtY_4Cg-S8XPGnI",
+  authDomain: "intelligence-cc986.firebaseapp.com",
+  databaseURL: "https://intelligence-cc986-default-rtdb.firebaseio.com",
+  projectId: "intelligence-cc986",
+  storageBucket: "intelligence-cc986.firebasestorage.app",
+  messagingSenderId: "273854675547",
+  appId: "1:273854675547:web:3594645a7230a22c325d7e",
+  measurementId: "G-7HX9VBXNWD"
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getDatabase(firebaseApp);
+
+// ─── Login Screen ───────────────────────────────────────
+let currentUserId = localStorage.getItem('intel_uid') || null;
+
+function showLoginScreen() {
+  document.body.insertAdjacentHTML('beforeend', `
+    <div id="login-overlay" style="position:fixed;inset:0;background:#04040a;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;font-family:'JetBrains Mono',monospace;">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:0.3em;color:#c8c8e0;">INTEL<span style="color:#e63946">LIGENCE</span></div>
+      <div style="font-size:9px;letter-spacing:0.2em;color:#44445c;text-transform:uppercase;margin-top:-12px;">Shared Knowledge OS</div>
+      <div style="background:#09090f;border:1px solid #1e1e2e;border-radius:6px;padding:28px 32px;width:320px;display:flex;flex-direction:column;gap:14px;">
+        <div style="font-size:8px;letter-spacing:0.2em;color:#5a5870;text-transform:uppercase;margin-bottom:4px;">Enter your username to continue</div>
+        <input id="login-name-input" type="text" placeholder="Your name (e.g. Alex)" maxlength="20"
+          style="font-family:'JetBrains Mono',monospace;font-size:13px;background:#04040a;border:1px solid #1e1e2e;border-radius:3px;color:#c8c8e0;padding:10px 13px;outline:none;letter-spacing:0.06em;"
+          onkeydown="if(event.key==='Enter')window.doLogin()"/>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;" id="login-color-row">
+          ${['#e63946','#7c6aff','#4cc9f0','#4ade80','#f4a261','#f472b6'].map(c=>`<div onclick="window.selectLoginColor('${c}')" style="width:22px;height:22px;border-radius:50%;background:${c};cursor:pointer;border:2px solid transparent;transition:all 0.15s;" data-color="${c}"></div>`).join('')}
+        </div>
+        <button onclick="window.doLogin()" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;padding:10px;border:1px solid #e63946;background:transparent;color:#e63946;cursor:pointer;border-radius:3px;transition:all 0.15s;"
+          onmouseover="this.style.background='#e63946';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#e63946'">
+          Enter Intelligence
+        </button>
+        <div id="login-err" style="font-size:9px;color:#e63946;text-align:center;min-height:14px;letter-spacing:0.08em;"></div>
+      </div>
+    </div>`);
+  // select first color by default
+  window.selectedLoginColor = '#e63946';
+  document.querySelector('#login-color-row [data-color="#e63946"]').style.border = '2px solid #fff';
+}
+
+window.selectLoginColor = function(c) {
+  window.selectedLoginColor = c;
+  document.querySelectorAll('#login-color-row [data-color]').forEach(el => el.style.border = '2px solid transparent');
+  document.querySelector(`#login-color-row [data-color="${c}"]`).style.border = '2px solid #fff';
+};
+
+window.doLogin = async function() {
+  const name = document.getElementById('login-name-input').value.trim();
+  if (!name) { document.getElementById('login-err').textContent = 'Please enter a name'; return; }
+  const uid = name.toLowerCase().replace(/\s+/g,'_');
+  // Check if user exists in Firebase, create if not
+  const userRef = ref(db, `users/${uid}`);
+  const snap = await get(userRef);
+  if (!snap.exists()) {
+    await set(userRef, {
+      id: uid, name, color: window.selectedLoginColor || '#e63946', role: 'Member',
+      swSessions: [], bodyNotes: [], resources: [], connections: [], research: [], kgPositions: {}
+    });
+  }
+  currentUserId = uid;
+  localStorage.setItem('intel_uid', uid);
+  document.getElementById('login-overlay').remove();
+  initApp();
+};
+
+// ─── State ──────────────────────────────────────────────
 let state = {
   currentUser: null,
   users: [],
@@ -893,23 +964,55 @@ let state = {
   kgPositions: {},
 };
 
-// Load persisted
-try {
-  const saved = localStorage.getItem('intelligence_v1');
-  if (saved) {
-    const p = JSON.parse(saved);
-    Object.assign(state, p);
-    state.swRunning = false;
-    state.swStartTime = null;
-  }
-} catch(e){}
-
+// ─── Firebase Sync ───────────────────────────────────────
+let _persistTimeout = null;
 function persist() {
-  try {
-    const s = Object.assign({}, state);
-    delete s.swRunning; delete s.swStartTime;
-    localStorage.setItem('intelligence_v1', JSON.stringify(s));
-  } catch(e){}
+  if (!currentUserId) return;
+  clearTimeout(_persistTimeout);
+  _persistTimeout = setTimeout(() => {
+    const s = {
+      swSessions: state.swSessions,
+      bodyNotes: state.bodyNotes,
+      resources: state.resources,
+      connections: state.connections,
+      research: state.research,
+      kgPositions: state.kgPositions,
+    };
+    update(ref(db, `users/${currentUserId}`), s).catch(e => console.error('Firebase write error:', e));
+  }, 800);
+}
+
+function listenToUser(uid) {
+  onValue(ref(db, `users/${uid}`), snap => {
+    const data = snap.val();
+    if (!data) return;
+    state.swSessions = data.swSessions || [];
+    state.bodyNotes = data.bodyNotes || [];
+    state.resources = data.resources || [];
+    state.connections = data.connections || [];
+    state.research = data.research || [];
+    state.kgPositions = data.kgPositions || {};
+    state.currentUser = { id: data.id, name: data.name, color: data.color, role: data.role };
+    updateSwStats(); renderSwSessions(); renderBodyNotes();
+    updateTicker(); updateHomeCounts(); updateUserUI();
+    if (state.resources.length) state.resources.forEach(r => updateYtThumb(r));
+  });
+}
+
+function listenToAllUsers() {
+  onValue(ref(db, 'users'), snap => {
+    const data = snap.val();
+    if (!data) return;
+    state.users = Object.values(data).filter(u => u.id !== currentUserId);
+    renderAllMembers();
+  });
+}
+
+async function initApp() {
+  listenToUser(currentUserId);
+  listenToAllUsers();
+  updateSwStats(); renderSwSessions(); renderBodyNotes();
+  updateTicker(); updateHomeCounts(); updateUserUI();
 }
 
 // ═══════════════════════════════════
@@ -1604,25 +1707,10 @@ function updateResearchStats() {
 // ═══════════════════════════════════
 //  COMMUNITY
 // ═══════════════════════════════════
-const DEMO_USERS = [
-  {id:'u1',name:'Alex',role:'Researcher',color:'#7c6aff'},
-  {id:'u2',name:'Maya',role:'Student',color:'#4cc9f0'},
-  {id:'u3',name:'Leo',role:'Analyst',color:'#f4a261'},
-];
 
 function renderCommunity() {
   const loginSection = document.getElementById('login-section');
   const mainSection = document.getElementById('community-main');
-  // Populate demo user profiles
-  const grid = document.getElementById('user-profiles-grid');
-  if (grid) {
-    grid.innerHTML = DEMO_USERS.map(u => `
-      <div class="user-profile-btn ${state.currentUser&&state.currentUser.id===u.id?'selected':''}" onclick="loginAs('${u.id}')">
-        <div class="upb-avatar" style="background:${u.color}">${u.name.charAt(0)}</div>
-        <div class="upb-name">${u.name}</div>
-        <div class="upb-role">${u.role}</div>
-      </div>`).join('');
-  }
   if (state.currentUser) {
     loginSection.style.display = 'none';
     mainSection.style.display = 'block';
@@ -1634,37 +1722,36 @@ function renderCommunity() {
   }
 }
 
-function loginAs(uid) {
-  const u = DEMO_USERS.find(x => x.id === uid);
-  if (!u) return;
-  state.currentUser = Object.assign({}, u);
-  updateUserUI();
-  renderCommunity();
-  persist();
-  showToast(`Signed in as ${u.name}`, 'ok');
-}
-
-function createProfile() {
-  const name = document.getElementById('new-user-name').value.trim();
-  if (!name) { showToast('Name required', 'err'); return; }
-  const role = document.getElementById('new-user-role').value.trim() || 'Member';
-  const colors = ['#e63946','#f4a261','#4ade80','#4cc9f0','#7c6aff','#f472b6','#fb923c'];
-  const color = colors[Math.floor(Math.random()*colors.length)];
-  const u = { id: 'u_'+Date.now(), name, role, color };
-  if (!state.users.find(x => x.id === u.id)) state.users.push(u);
-  state.currentUser = u;
-  updateUserUI();
-  renderCommunity();
-  persist();
-  showToast(`Welcome, ${name}!`, 'ok');
-}
+function loginAs(uid) { /* disabled - using Firebase login */ }
+function createProfile() { /* disabled - using Firebase login */ }
 
 function signOut() {
-  state.currentUser = null;
-  updateUserUI();
-  renderCommunity();
-  persist();
+  localStorage.removeItem('intel_uid');
+  currentUserId = null;
+  location.reload();
 }
+window.logoutUser = signOut;
+
+function openUserModal() {
+  if (!state.currentUser) return;
+  document.getElementById('um-name').value = state.currentUser.name;
+  document.getElementById('um-role').value = state.currentUser.role || '';
+  openModal('user-modal');
+}
+window.openUserModal = openUserModal;
+
+function saveUserProfile() {
+  const name = document.getElementById('um-name').value.trim();
+  if (!name) { showToast('Name required','err'); return; }
+  const role = document.getElementById('um-role').value.trim() || 'Member';
+  state.currentUser.name = name;
+  state.currentUser.role = role;
+  update(ref(db, `users/${currentUserId}`), { name, role });
+  updateUserUI();
+  closeModal('user-modal');
+  showToast('Profile updated','ok');
+}
+window.saveUserProfile = saveUserProfile;
 
 function updateUserUI() {
   const avatarEl = document.getElementById('user-avatar-top');
@@ -1711,40 +1798,38 @@ function renderMyProfile() {
 
 function renderAllMembers() {
   const el = document.getElementById('community-feed');
-  const allUsers = [...DEMO_USERS, ...state.users.filter(u => !DEMO_USERS.find(d => d.id === u.id))];
-  if (!allUsers.length) { el.innerHTML = '<div style="font-size:10px;color:var(--text-dim);font-style:italic;text-align:center;padding:20px">No other members yet.</div>'; return; }
-  // Demo stats for built-in users
-  const demoStats = {
-    u1: {sessions:12,resources:8,research:3,notes:15,study:'4h 30m'},
-    u2: {sessions:7,resources:12,research:1,notes:22,study:'2h 15m'},
-    u3: {sessions:20,resources:5,research:6,notes:8,study:'8h 45m'},
-  };
+  const allUsers = state.users; // real Firebase users (excludes self)
+  if (!allUsers.length) {
+    el.innerHTML = '<div style="font-size:10px;color:var(--text-dim);font-style:italic;text-align:center;padding:20px">No other members yet. Share the link with your friend!</div>';
+    return;
+  }
   el.innerHTML = allUsers.map(u => {
-    const isMe = state.currentUser && state.currentUser.id === u.id;
-    const stats = demoStats[u.id] || {
-      sessions: isMe ? state.swSessions.length : 0,
-      resources: isMe ? state.resources.length : 0,
-      research: isMe ? state.research.filter(r=>r.author===u.name).length : 0,
-      notes: isMe ? state.bodyNotes.length : 0,
-      study: isMe ? (() => { const t=state.swSessions.reduce((a,s)=>a+s.elapsed,0); return `${Math.floor(t/3600000)}h ${Math.floor((t%3600000)/60000)}m`; })() : '0h 0m'
-    };
-    return `<div class="cf-user-card" style="${isMe?'border-color:'+u.color+';':''}" >
+    const sessions = (u.swSessions||[]).length;
+    const resources = (u.resources||[]).length;
+    const research = (u.research||[]).length;
+    const notes = (u.bodyNotes||[]).length;
+    const totalMs = (u.swSessions||[]).reduce((a,s)=>a+(s.elapsed||0),0);
+    const study = `${Math.floor(totalMs/3600000)}h ${Math.floor((totalMs%3600000)/60000)}m`;
+    return `<div class="cf-user-card" style="border-color:${u.color||'var(--border)'}">
       <div class="cf-user-top">
-        <div class="cf-avatar" style="background:${u.color}">${u.name.charAt(0).toUpperCase()}</div>
-        <div><div class="cf-uname">${u.name} ${isMe?'<span style="font-size:8px;color:'+u.color+';letter-spacing:0.1em">(you)</span>':''}</div><div class="cf-urole">${u.role}</div></div>
+        <div class="cf-avatar" style="background:${u.color||'#7c6aff'}">${u.name.charAt(0).toUpperCase()}</div>
+        <div><div class="cf-uname">${u.name}</div><div class="cf-urole">${u.role||'Member'}</div></div>
         <span style="margin-left:auto;font-size:8px;letter-spacing:0.12em;color:var(--green);display:flex;align-items:center;gap:4px"><span style="width:5px;height:5px;border-radius:50%;background:var(--green);display:inline-block"></span> Online</span>
       </div>
       <div class="cf-stats">
-        <div class="cf-stat"><div class="cf-stat-num">${stats.sessions}</div><div class="cf-stat-label">Sessions</div></div>
-        <div class="cf-stat"><div class="cf-stat-num">${stats.resources}</div><div class="cf-stat-label">Resources</div></div>
-        <div class="cf-stat"><div class="cf-stat-num">${stats.research}</div><div class="cf-stat-label">Research</div></div>
-        <div class="cf-stat"><div class="cf-stat-num">${stats.notes}</div><div class="cf-stat-label">Notes</div></div>
+        <div class="cf-stat"><div class="cf-stat-num">${sessions}</div><div class="cf-stat-label">Sessions</div></div>
+        <div class="cf-stat"><div class="cf-stat-num">${resources}</div><div class="cf-stat-label">Resources</div></div>
+        <div class="cf-stat"><div class="cf-stat-num">${research}</div><div class="cf-stat-label">Research</div></div>
+        <div class="cf-stat"><div class="cf-stat-num">${notes}</div><div class="cf-stat-label">Notes</div></div>
       </div>
       <div class="cf-progress-section">
-        ${[{l:'Study',p:Math.min(parseInt(stats.study)*2,100),c:u.color},{l:'Resources',p:Math.min(stats.resources*10,100),c:u.color},{l:'Research',p:Math.min(stats.research*15,100),c:u.color}].map(b=>
-          `<div class="cf-prog-row"><div class="cf-prog-label">${b.l}</div><div class="cf-prog-bar"><div class="cf-prog-fill" style="width:${b.p}%;background:${b.c}"></div></div><div class="cf-prog-pct">${b.p}%</div></div>`
-        ).join('')}
+        ${[
+          {l:'Study', p:Math.min(Math.round(totalMs/36000),100), c:u.color||'var(--cyan)'},
+          {l:'Resources', p:Math.min(resources*10,100), c:u.color||'var(--violet)'},
+          {l:'Research', p:Math.min(research*15,100), c:u.color||'var(--accent)'}
+        ].map(b=>`<div class="cf-prog-row"><div class="cf-prog-label">${b.l}</div><div class="cf-prog-bar"><div class="cf-prog-fill" style="width:${b.p}%;background:${b.c}"></div></div><div class="cf-prog-pct">${b.p}%</div></div>`).join('')}
       </div>
+      <div style="font-size:8px;color:var(--text-dim);letter-spacing:0.08em;text-align:right;margin-top:8px">Study total: ${study}</div>
     </div>`;
   }).join('');
 }
@@ -1801,15 +1886,44 @@ document.querySelectorAll('.modal-overlay').forEach(ov => {
 // ═══════════════════════════════════
 //  INIT
 // ═══════════════════════════════════
-updateSwStats();
-renderSwSessions();
-renderBodyNotes();
-updateTicker();
-updateHomeCounts();
-updateUserUI();
-if (state.resources.length) {
-  state.resources.forEach(r => updateYtThumb(r));
+if (currentUserId) {
+  initApp();
+} else {
+  showLoginScreen();
 }
+
+// Expose functions needed by inline HTML onclick handlers
+window.switchTab = switchTab;
+window.swStartStop = swStartStop;
+window.swReset = swReset;
+window.swLap = swLap;
+window.swSetGoal = swSetGoal;
+window.swExport = swExport;
+window.swClearAll = swClearAll;
+window.swDeleteSession = swDeleteSession;
+window.openBodyModal = openBodyModal;
+window.selectBodyPart = selectBodyPart;
+window.saveBodyNote = saveBodyNote;
+window.deleteBodyNote = deleteBodyNote;
+window.openAddResource = openAddResource;
+window.saveResource = saveResource;
+window.setResType = setResType;
+window.switchKgView = switchKgView;
+window.kgFitAll = kgFitAll;
+window.kgAutoLayout = kgAutoLayout;
+window.kgConnectMode = kgConnectMode;
+window.saveConnection = saveConnection;
+window.deleteResource = deleteResource;
+window.openAddResearch = openAddResearch;
+window.saveResearch = saveResearch;
+window.voteResearch = voteResearch;
+window.openValidate = openValidate;
+window.submitValidation = submitValidation;
+window.openModal = openModal;
+window.closeModal = closeModal;
+window.openUserModal = openUserModal;
+window.saveUserProfile = saveUserProfile;
+window.logoutUser = logoutUser;
 </script>
 </body>
 </html>
