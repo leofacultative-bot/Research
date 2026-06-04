@@ -386,6 +386,10 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
   <button class="t-tab" onclick="switchTab('resources',this)">Resources</button>
   <button class="t-tab" onclick="switchTab('research',this)">Research</button>
   <button class="t-tab" onclick="switchTab('community',this)">Community</button>
+  <button class="t-tab" onclick="switchTab('osint',this)" style="color:var(--accent);border-bottom:2px solid transparent;position:relative;">
+    <span style="margin-right:4px">🔍</span>OSINT
+    <span style="position:absolute;top:8px;right:6px;font-size:6px;letter-spacing:0.1em;background:var(--accent);color:#fff;padding:1px 4px;border-radius:2px;font-weight:700">VAULT</span>
+  </button>
   <div class="t-clock">
     <span id="top-clock"><strong>--:--:--</strong></span>
     <div class="t-user-pill" onclick="switchTab('community',document.querySelectorAll('.t-tab')[5])">
