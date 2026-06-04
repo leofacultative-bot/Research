@@ -1,3 +1,4 @@
+cat > /mnt/user-data/outputs/intelligence_fixed.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,8 +31,6 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;height:100vh;display:flex;flex-direction:column;overflow:hidden;}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.6;}
-
-/* ── Topbar ── */
 .topbar{height:var(--top-h);background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:stretch;padding:0 16px 0 calc(var(--nav-w) + 14px);flex-shrink:0;position:relative;z-index:100;}
 .t-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.28em;color:var(--text);display:flex;align-items:center;padding-right:22px;flex-shrink:0;}
 .t-logo span{color:var(--accent);}
@@ -47,8 +46,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .t-user-pill:hover{border-color:var(--violet);background:rgba(124,106,255,0.06);}
 .t-avatar{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;flex-shrink:0;}
 .t-uname{font-size:9px;letter-spacing:0.1em;color:var(--text-dim);}
-
-/* ── Ticker ── */
 .ticker{height:var(--tick-h);background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;flex-shrink:0;overflow:hidden;position:relative;z-index:99;}
 .tick-live{display:flex;align-items:center;gap:5px;padding:0 12px 0 calc(var(--nav-w) + 12px);flex-shrink:0;border-right:1px solid var(--border);height:100%;}
 .tick-dot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 5px var(--green);animation:pulse 1.5s ease infinite;}
@@ -69,8 +66,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .tick-stat{text-align:right;}
 .tick-snum{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.06em;color:var(--text);line-height:1;}
 .tick-slbl{font-size:7px;letter-spacing:0.14em;color:var(--text-dim);text-transform:uppercase;}
-
-/* ── Layout ── */
 .layout{display:flex;flex:1;min-height:0;overflow:hidden;}
 .sidebar{width:var(--nav-w);background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;padding:10px 0;gap:3px;flex-shrink:0;z-index:50;}
 .nb{width:38px;height:38px;border-radius:7px;border:1px solid transparent;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;position:relative;color:var(--text-dim);}
@@ -82,8 +77,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .nav-ind{position:absolute;left:0;top:50%;transform:translateY(-50%);width:2px;height:16px;background:var(--accent);border-radius:0 2px 2px 0;opacity:0;transition:opacity 0.2s;}
 .nb.active .nav-ind{opacity:1;}
 .nb-sep{width:26px;height:1px;background:var(--border);margin:4px 0;flex-shrink:0;}
-
-/* ── Main ── */
 .main{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;position:relative;}
 .main::-webkit-scrollbar{width:3px;}
 .main::-webkit-scrollbar-track{background:var(--bg);}
@@ -91,8 +84,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .panel{display:none;min-height:100%;padding:26px 26px 60px;animation:fadeIn 0.25s ease both;}
 .panel.active{display:block;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-
-/* ── Shared ── */
 .ph{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--border);}
 .ph-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.2em;color:var(--text);line-height:1;}
 .ph-title span{color:var(--accent);}
@@ -124,10 +115,6 @@ input::placeholder,textarea::placeholder{color:var(--text-dim);font-style:italic
 label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-dim);display:block;margin-bottom:5px;}
 .field{margin-bottom:12px;}
 .tag-chip{display:inline-flex;align-items:center;gap:5px;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;padding:2px 8px;border-radius:2px;border:1px solid;font-weight:700;}
-
-/* ══════════════════════════════════════
-   HOME / OVERVIEW
-══════════════════════════════════════ */
 .home-hero{background:linear-gradient(135deg,rgba(124,106,255,0.06),rgba(76,201,240,0.04));border:1px solid var(--border2);border-radius:4px;padding:24px 28px;margin-bottom:20px;position:relative;overflow:hidden;}
 .home-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(124,106,255,0.08),transparent 70%);}
 .home-title{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:0.25em;line-height:1;margin-bottom:8px;}
@@ -157,10 +144,6 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
 .feed-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
 .feed-text{font-size:10px;letter-spacing:0.04em;color:var(--text-dim);line-height:1.5;flex:1;}
 .feed-time{font-size:8px;letter-spacing:0.08em;color:var(--text-dim);}
-
-/* ══════════════════════════════════════
-   STOPWATCH VAULT
-══════════════════════════════════════ */
 .sw-hero{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:32px 0 24px;}
 .sw-ring-wrap{position:relative;width:220px;height:220px;}
 .sw-ring-wrap svg{transform:rotate(-90deg);}
@@ -203,10 +186,6 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
 .lap-num{color:var(--text-dim);font-size:8px;letter-spacing:0.1em;}
 .lap-time{color:var(--cyan);font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.06em;}
 .lap-split{color:var(--text-dim);font-size:9px;}
-
-/* ══════════════════════════════════════
-   BODY LANGUAGE VAULT
-══════════════════════════════════════ */
 .body-layout{display:grid;grid-template-columns:280px 1fr;gap:18px;min-height:500px;}
 .body-model-area{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px;}
 .body-svg-wrap{position:relative;width:220px;flex:1;}
@@ -233,10 +212,6 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
 .signal-chip{font-size:8px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border:1px solid var(--border2);border-radius:2px;color:var(--text-dim);cursor:pointer;transition:all 0.15s;}
 .signal-chip:hover{border-color:var(--gold);color:var(--gold);}
 .signal-chip.active{border-color:var(--gold);color:var(--gold);background:rgba(244,162,97,0.08);}
-
-/* ══════════════════════════════════════
-   RESOURCES / KNOWLEDGE GRAPH VAULT
-══════════════════════════════════════ */
 .kg-top{display:flex;gap:8px;align-items:center;margin-bottom:16px;}
 .kg-tab{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;padding:5px 14px;border:1px solid var(--border2);border-radius:2px;color:var(--text-dim);cursor:pointer;transition:all 0.15s;}
 .kg-tab:hover{color:var(--text);}
@@ -275,17 +250,12 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
 .res-title{font-size:10px;letter-spacing:0.04em;color:var(--text);font-weight:500;margin-bottom:4px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .res-meta{font-size:8px;letter-spacing:0.08em;color:var(--text-dim);}
 .res-connections{font-size:8px;color:var(--violet);margin-top:5px;letter-spacing:0.06em;}
-.add-res-form{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:18px;margin-bottom:16px;}
 .add-res-tabs{display:flex;gap:6px;margin-bottom:14px;}
 .art-tab{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;padding:5px 14px;border:1px solid var(--border2);border-radius:2px;color:var(--text-dim);cursor:pointer;transition:all 0.15s;}
 .art-tab:hover{color:var(--text);}
 .art-tab.active.book{border-color:var(--violet);color:var(--violet);background:rgba(124,106,255,0.08);}
 .art-tab.active.video{border-color:var(--accent);color:var(--accent);background:rgba(230,57,70,0.08);}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-
-/* ══════════════════════════════════════
-   RESEARCH VAULT
-══════════════════════════════════════ */
 .research-list{display:flex;flex-direction:column;gap:12px;}
 .research-card{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:16px 18px;transition:all 0.2s;}
 .research-card:hover{border-color:var(--border2);}
@@ -318,25 +288,11 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
 .comment-text{font-size:10px;color:var(--text);line-height:1.7;}
 .credibility-bar{height:4px;border-radius:2px;background:var(--border);margin-top:10px;overflow:hidden;}
 .cred-fill{height:100%;border-radius:2px;transition:width 0.5s ease;}
-.add-research-form{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:18px;margin-bottom:16px;}
-
-/* ══════════════════════════════════════
-   COMMUNITY / LOGIN
-══════════════════════════════════════ */
 .login-screen{display:flex;align-items:center;justify-content:center;min-height:400px;}
 .login-box{background:var(--surface);border:1px solid var(--border2);border-radius:6px;padding:32px;width:100%;max-width:380px;box-shadow:0 0 60px rgba(0,0,0,0.5);}
 .login-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.28em;text-align:center;margin-bottom:4px;}
 .login-logo span{color:var(--violet);}
 .login-sub{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-dim);text-align:center;margin-bottom:24px;}
-.user-profiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px;}
-.user-profile-btn{background:var(--surface2);border:1px solid var(--border2);border-radius:3px;padding:12px;cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;gap:7px;}
-.user-profile-btn:hover{border-color:var(--violet);background:rgba(124,106,255,0.06);}
-.user-profile-btn.selected{border-color:var(--violet);background:rgba(124,106,255,0.1);}
-.upb-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;}
-.upb-name{font-size:10px;letter-spacing:0.06em;color:var(--text);}
-.upb-role{font-size:7px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-dim);}
-.or-divider{display:flex;align-items:center;gap:10px;margin:16px 0;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-dim);}
-.or-divider::before,.or-divider::after{content:'';flex:1;height:1px;background:var(--border);}
 .community-feed{display:flex;flex-direction:column;gap:12px;}
 .cf-user-card{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:14px 16px;}
 .cf-user-top{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
@@ -353,10 +309,6 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
 .cf-prog-bar{flex:1;height:3px;background:var(--border);border-radius:2px;overflow:hidden;}
 .cf-prog-fill{height:100%;border-radius:2px;}
 .cf-prog-pct{font-size:8px;letter-spacing:0.06em;color:var(--text-dim);width:28px;text-align:right;flex-shrink:0;}
-
-/* ══════════════════════════════════════
-   MODALS
-══════════════════════════════════════ */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(4,4,10,0.88);z-index:950;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
 .modal-overlay.open{display:flex;animation:fadeIn 0.2s ease;}
 .modal-box{background:var(--surface);border:1px solid var(--border2);border-radius:6px;width:100%;max-width:500px;padding:24px;max-height:90vh;overflow-y:auto;box-shadow:0 0 80px rgba(0,0,0,0.7);animation:slideUp 0.22s ease both;}
@@ -366,8 +318,6 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
 .modal-close{background:none;border:1px solid var(--border2);border-radius:2px;color:var(--text-dim);cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.12em;padding:4px 10px;text-transform:uppercase;transition:all 0.15s;}
 .modal-close:hover{border-color:var(--accent);color:var(--accent);}
 .modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:18px;padding-top:14px;border-top:1px solid var(--border);}
-
-/* toast */
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(8px);background:var(--surface2);border:1px solid var(--border2);border-radius:3px;padding:8px 16px;font-size:10px;letter-spacing:0.07em;color:var(--text);z-index:9000;opacity:0;pointer-events:none;transition:all 0.22s;white-space:nowrap;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 .toast.ok{border-color:rgba(74,222,128,0.4);color:var(--green);}
@@ -376,30 +326,24 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
 </head>
 <body>
 
-<!-- ── Topbar ── -->
 <div class="topbar">
   <div class="t-logo">INTELLI<span>GENCE</span></div>
   <div class="t-divider"></div>
-  <button class="t-tab active" onclick="switchTab('home',this)">Overview</button>
-  <button class="t-tab" onclick="switchTab('stopwatch',this)">Stopwatch</button>
-  <button class="t-tab" onclick="switchTab('body',this)">Body Language</button>
-  <button class="t-tab" onclick="switchTab('resources',this)">Resources</button>
-  <button class="t-tab" onclick="switchTab('research',this)">Research</button>
-  <button class="t-tab" onclick="switchTab('community',this)">Community</button>
-  <button class="t-tab" onclick="switchTab('osint',this)" style="color:var(--accent);border-bottom:2px solid transparent;position:relative;">
-    <span style="margin-right:4px">🔍</span>OSINT
-    <span style="position:absolute;top:8px;right:6px;font-size:6px;letter-spacing:0.1em;background:var(--accent);color:#fff;padding:1px 4px;border-radius:2px;font-weight:700">VAULT</span>
-  </button>
+  <button class="t-tab active" onclick="window._app.switchTab('home',this)">Overview</button>
+  <button class="t-tab" onclick="window._app.switchTab('stopwatch',this)">Stopwatch</button>
+  <button class="t-tab" onclick="window._app.switchTab('body',this)">Body Language</button>
+  <button class="t-tab" onclick="window._app.switchTab('resources',this)">Resources</button>
+  <button class="t-tab" onclick="window._app.switchTab('research',this)">Research</button>
+  <button class="t-tab" onclick="window._app.switchTab('community',this)">Community</button>
   <div class="t-clock">
     <span id="top-clock"><strong>--:--:--</strong></span>
-    <div class="t-user-pill" onclick="switchTab('community',document.querySelectorAll('.t-tab')[5])">
+    <div class="t-user-pill" onclick="window._app.switchTab('community',document.querySelectorAll('.t-tab')[5])">
       <div class="t-avatar" id="user-avatar-top">?</div>
       <span class="t-uname" id="user-name-top">Sign In</span>
     </div>
   </div>
 </div>
 
-<!-- ── Ticker ── -->
 <div class="ticker">
   <div class="tick-live">
     <div class="tick-dot"></div>
@@ -424,37 +368,36 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
   </div>
 </div>
 
-<!-- ── Layout ── -->
 <div class="layout">
   <nav class="sidebar">
-    <button class="nb active" onclick="switchTab('home',this)" data-panel="home">
+    <button class="nb active" onclick="window._app.switchTab('home',this)" data-panel="home">
       <div class="nav-ind"></div>
       <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       <span class="ntt">Home</span>
     </button>
-    <button class="nb" onclick="switchTab('stopwatch',this)" data-panel="stopwatch">
+    <button class="nb" onclick="window._app.switchTab('stopwatch',this)" data-panel="stopwatch">
       <div class="nav-ind"></div>
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/><line x1="12" y1="3" x2="12" y2="1"/><line x1="16" y1="4" x2="17" y2="2"/><line x1="8" y1="4" x2="7" y2="2"/></svg>
       <span class="ntt">Stopwatch</span>
     </button>
     <div class="nb-sep"></div>
-    <button class="nb" onclick="switchTab('body',this)" data-panel="body">
+    <button class="nb" onclick="window._app.switchTab('body',this)" data-panel="body">
       <div class="nav-ind"></div>
       <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><line x1="12" y1="7" x2="12" y2="14"/><polyline points="8 10 12 14 16 10"/><line x1="12" y1="14" x2="10" y2="20"/><line x1="12" y1="14" x2="14" y2="20"/></svg>
       <span class="ntt">Body Language</span>
     </button>
-    <button class="nb" onclick="switchTab('resources',this)" data-panel="resources">
+    <button class="nb" onclick="window._app.switchTab('resources',this)" data-panel="resources">
       <div class="nav-ind"></div>
       <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
       <span class="ntt">Resources</span>
     </button>
-    <button class="nb" onclick="switchTab('research',this)" data-panel="research">
+    <button class="nb" onclick="window._app.switchTab('research',this)" data-panel="research">
       <div class="nav-ind"></div>
       <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
       <span class="ntt">Research Vault</span>
     </button>
     <div class="nb-sep"></div>
-    <button class="nb" onclick="switchTab('community',this)" data-panel="community">
+    <button class="nb" onclick="window._app.switchTab('community',this)" data-panel="community">
       <div class="nav-ind"></div>
       <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
       <span class="ntt">Community</span>
@@ -463,7 +406,7 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
 
   <main class="main">
 
-    <!-- ══ HOME ══ -->
+    <!-- HOME -->
     <div id="panel-home" class="panel active">
       <div class="ph">
         <div><div class="ph-title">INTELLI<span>GENCE</span></div><div class="ph-sub">Your Personal Knowledge OS</div></div>
@@ -473,33 +416,28 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
         <div class="home-sub">Track time · Map your body · Connect resources · Validate research · Share with your community</div>
       </div>
       <div class="vault-cards">
-        <div class="vault-card vc-sw" onclick="switchTab('stopwatch',document.querySelectorAll('.t-tab')[1])">
-          <div class="vc-icon">⏱</div>
-          <div class="vc-name">Stopwatch Vault</div>
+        <div class="vault-card vc-sw" onclick="window._app.switchTab('stopwatch',document.querySelectorAll('.t-tab')[1])">
+          <div class="vc-icon">⏱</div><div class="vc-name">Stopwatch Vault</div>
           <div class="vc-desc">Track study & focus sessions with lap logging</div>
           <div class="vc-count" id="home-sw-count">0 sessions</div>
         </div>
-        <div class="vault-card vc-body" onclick="switchTab('body',document.querySelectorAll('.t-tab')[2])">
-          <div class="vc-icon">🧍</div>
-          <div class="vc-name">Body Language</div>
+        <div class="vault-card vc-body" onclick="window._app.switchTab('body',document.querySelectorAll('.t-tab')[2])">
+          <div class="vc-icon">🧍</div><div class="vc-name">Body Language</div>
           <div class="vc-desc">Annotate anatomy with signals & gestures</div>
           <div class="vc-count" id="home-body-count">0 notes</div>
         </div>
-        <div class="vault-card vc-res" onclick="switchTab('resources',document.querySelectorAll('.t-tab')[3])">
-          <div class="vc-icon">🔗</div>
-          <div class="vc-name">Knowledge Graph</div>
+        <div class="vault-card vc-res" onclick="window._app.switchTab('resources',document.querySelectorAll('.t-tab')[3])">
+          <div class="vc-icon">🔗</div><div class="vc-name">Knowledge Graph</div>
           <div class="vc-desc">Connect books & YouTube videos visually</div>
           <div class="vc-count" id="home-res-count">0 items</div>
         </div>
-        <div class="vault-card vc-research" onclick="switchTab('research',document.querySelectorAll('.t-tab')[4])">
-          <div class="vc-icon">📄</div>
-          <div class="vc-name">Research Vault</div>
+        <div class="vault-card vc-research" onclick="window._app.switchTab('research',document.querySelectorAll('.t-tab')[4])">
+          <div class="vc-icon">📄</div><div class="vc-name">Research Vault</div>
           <div class="vc-desc">Upload research for peer credibility review</div>
           <div class="vc-count" id="home-research-count">0 papers</div>
         </div>
-        <div class="vault-card vc-collab" onclick="switchTab('community',document.querySelectorAll('.t-tab')[5])">
-          <div class="vc-icon">👥</div>
-          <div class="vc-name">Community</div>
+        <div class="vault-card vc-collab" onclick="window._app.switchTab('community',document.querySelectorAll('.t-tab')[5])">
+          <div class="vc-icon">👥</div><div class="vc-name">Community</div>
           <div class="vc-desc">Others can login & see your progress live</div>
           <div class="vc-count" id="home-members-count">3 active</div>
         </div>
@@ -512,13 +450,13 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
       </div>
     </div>
 
-    <!-- ══ STOPWATCH ══ -->
+    <!-- STOPWATCH -->
     <div id="panel-stopwatch" class="panel">
       <div class="ph">
         <div><div class="ph-title">STOP<span>WATCH</span></div><div class="ph-sub">Focus & Study Session Tracker</div></div>
         <div class="ph-actions">
-          <button class="btn cyan" onclick="swExport()">Export Log</button>
-          <button class="btn" onclick="swClearAll()">Clear All</button>
+          <button class="btn cyan" onclick="window._app.swExport()">Export Log</button>
+          <button class="btn" onclick="window._app.swClearAll()">Clear All</button>
         </div>
       </div>
       <div class="grid4" style="margin-bottom:20px;">
@@ -527,7 +465,6 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
         <div class="card"><div class="card-label">Avg Session</div><div class="card-value" id="sw-avg" style="color:var(--gold)">—</div></div>
         <div class="card"><div class="card-label">Today</div><div class="card-value" id="sw-today" style="color:var(--green)">0h 00m</div></div>
       </div>
-
       <div class="sw-hero">
         <div class="sw-ring-wrap" id="sw-ring-wrap">
           <svg viewBox="0 0 220 220" width="220" height="220">
@@ -541,85 +478,63 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
           </div>
         </div>
         <div class="sw-presets">
-          <button class="sw-preset" onclick="swSetGoal(25,'Pomodoro')">25m Pomodoro</button>
-          <button class="sw-preset" onclick="swSetGoal(45,'Deep Work')">45m Deep Work</button>
-          <button class="sw-preset" onclick="swSetGoal(60,'Focus Hour')">60m Focus</button>
-          <button class="sw-preset" onclick="swSetGoal(90,'Extended')">90m Extended</button>
-          <button class="sw-preset active" onclick="swSetGoal(0,'Free')">∞ Free</button>
+          <button class="sw-preset" onclick="window._app.swSetGoal(25,'Pomodoro')">25m Pomodoro</button>
+          <button class="sw-preset" onclick="window._app.swSetGoal(45,'Deep Work')">45m Deep Work</button>
+          <button class="sw-preset" onclick="window._app.swSetGoal(60,'Focus Hour')">60m Focus</button>
+          <button class="sw-preset" onclick="window._app.swSetGoal(90,'Extended')">90m Extended</button>
+          <button class="sw-preset active" onclick="window._app.swSetGoal(0,'Free')">∞ Free</button>
         </div>
         <div class="sw-controls">
-          <button class="sw-btn lap" id="sw-lap-btn" onclick="swLap()" disabled>Lap</button>
-          <button class="sw-btn start" id="sw-start-btn" onclick="swStartStop()">Start</button>
-          <button class="sw-btn" id="sw-reset-btn" onclick="swReset()">Reset</button>
+          <button class="sw-btn lap" id="sw-lap-btn" onclick="window._app.swLap()" disabled>Lap</button>
+          <button class="sw-btn start" id="sw-start-btn" onclick="window._app.swStartStop()">Start</button>
+          <button class="sw-btn" id="sw-reset-btn" onclick="window._app.swReset()">Reset</button>
         </div>
       </div>
-
       <div class="section-title">Laps</div>
       <div class="lap-list" id="lap-list"><div style="font-size:10px;color:var(--text-dim);text-align:center;padding:16px;font-style:italic">No laps recorded</div></div>
-
       <div class="sw-sessions">
         <div class="section-title" style="margin-top:16px">Session Log</div>
         <div id="sw-session-list"><div style="font-size:10px;color:var(--text-dim);text-align:center;padding:24px;border:1px solid var(--border);border-radius:3px;font-style:italic">No sessions logged yet. Hit Start to begin.</div></div>
       </div>
     </div>
 
-    <!-- ══ BODY LANGUAGE ══ -->
+    <!-- BODY LANGUAGE -->
     <div id="panel-body" class="panel">
       <div class="ph">
         <div><div class="ph-title">BODY <span>LANGUAGE</span></div><div class="ph-sub">Anatomy Annotation System</div></div>
         <div class="ph-actions">
-          <button class="btn gold" onclick="openBodyModal()" style="border-color:var(--gold);color:var(--gold)">+ Add Note</button>
+          <button class="btn" style="border-color:var(--gold);color:var(--gold)" onclick="window._app.openBodyModal()">+ Add Note</button>
         </div>
       </div>
       <div class="body-layout">
         <div class="body-model-area">
           <div class="section-title" style="width:100%">Select Body Region</div>
           <div class="body-svg-wrap" id="body-svg-container">
-            <!-- Body anatomy SVG -->
             <svg viewBox="0 0 160 380" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
-              <defs>
-                <radialGradient id="bg-grad" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="rgba(124,106,255,0.03)"/>
-                  <stop offset="100%" stop-color="transparent"/>
-                </radialGradient>
-              </defs>
-              <!-- Body outline -->
-              <!-- Head -->
-              <ellipse cx="80" cy="28" rx="22" ry="26" fill="rgba(30,30,50,0.8)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="head" onclick="selectBodyPart('head','Head & Face')" id="bp-head"/>
-              <!-- Neck -->
-              <rect x="70" y="52" width="20" height="16" rx="4" fill="rgba(30,30,50,0.8)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="neck" onclick="selectBodyPart('neck','Neck & Throat')" id="bp-neck"/>
-              <!-- Shoulders -->
-              <ellipse cx="42" cy="80" rx="22" ry="14" fill="rgba(30,30,50,0.8)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="shoulder-l" onclick="selectBodyPart('shoulder','Shoulders')" id="bp-shoulder-l"/>
-              <ellipse cx="118" cy="80" rx="22" ry="14" fill="rgba(30,30,50,0.8)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="shoulder-r" onclick="selectBodyPart('shoulder','Shoulders')" id="bp-shoulder-r"/>
-              <!-- Torso -->
-              <path d="M58 68 L48 170 L112 170 L102 68 Z" fill="rgba(30,30,50,0.8)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="torso" onclick="selectBodyPart('torso','Chest & Torso')" id="bp-torso"/>
-              <!-- Arms -->
-              <path d="M42 88 L28 150 L38 152 L52 90 Z" fill="rgba(30,30,50,0.7)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="arm-l" onclick="selectBodyPart('arms','Arms & Elbows')" id="bp-arm-l"/>
-              <path d="M118 88 L132 150 L122 152 L108 90 Z" fill="rgba(30,30,50,0.7)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="arm-r" onclick="selectBodyPart('arms','Arms & Elbows')" id="bp-arm-r"/>
-              <!-- Forearms -->
-              <path d="M28 150 L18 210 L30 212 L38 152 Z" fill="rgba(30,30,50,0.65)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="forearm-l" onclick="selectBodyPart('hands','Hands & Wrists')" id="bp-forearm-l"/>
-              <path d="M132 150 L142 210 L130 212 L122 152 Z" fill="rgba(30,30,50,0.65)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="forearm-r" onclick="selectBodyPart('hands','Hands & Wrists')" id="bp-forearm-r"/>
-              <!-- Hands -->
-              <ellipse cx="23" cy="220" rx="10" ry="14" fill="rgba(30,30,50,0.7)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="hand-l" onclick="selectBodyPart('hands','Hands & Wrists')" id="bp-hand-l"/>
-              <ellipse cx="137" cy="220" rx="10" ry="14" fill="rgba(30,30,50,0.7)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="hand-r" onclick="selectBodyPart('hands','Hands & Wrists')" id="bp-hand-r"/>
-              <!-- Hips -->
-              <path d="M48 168 L44 200 L116 200 L112 168 Z" fill="rgba(30,30,50,0.75)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="hips" onclick="selectBodyPart('hips','Hips & Pelvis')" id="bp-hips"/>
-              <!-- Legs -->
-              <path d="M56 200 L50 290 L78 290 L80 200 Z" fill="rgba(30,30,50,0.7)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="leg-l" onclick="selectBodyPart('legs','Legs & Knees')" id="bp-leg-l"/>
-              <path d="M80 200 L82 290 L110 290 L104 200 Z" fill="rgba(30,30,50,0.7)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="leg-r" onclick="selectBodyPart('legs','Legs & Knees')" id="bp-leg-r"/>
-              <!-- Lower legs -->
-              <path d="M50 288 L46 340 L74 340 L78 290 Z" fill="rgba(30,30,50,0.65)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="lleg-l" onclick="selectBodyPart('feet','Feet & Ankles')" id="bp-lleg-l"/>
-              <path d="M82 290 L86 340 L114 340 L110 288 Z" fill="rgba(30,30,50,0.65)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="lleg-r" onclick="selectBodyPart('feet','Feet & Ankles')" id="bp-lleg-r"/>
-              <!-- Feet -->
-              <ellipse cx="60" cy="350" rx="16" ry="10" fill="rgba(30,30,50,0.7)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="foot-l" onclick="selectBodyPart('feet','Feet & Ankles')" id="bp-foot-l"/>
-              <ellipse cx="100" cy="350" rx="16" ry="10" fill="rgba(30,30,50,0.7)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="foot-r" onclick="selectBodyPart('feet','Feet & Ankles')" id="bp-foot-r"/>
-              <!-- Labels -->
-              <text x="80" y="30" class="body-part-label" style="fill:#3a3a52;font-size:7px;text-anchor:middle;font-family:'JetBrains Mono',monospace">HEAD</text>
-              <text x="80" y="124" class="body-part-label" style="fill:#3a3a52;font-size:7px;text-anchor:middle;font-family:'JetBrains Mono',monospace">TORSO</text>
-              <text x="14" y="180" class="body-part-label" style="fill:#3a3a52;font-size:7px;text-anchor:middle;font-family:'JetBrains Mono',monospace">ARM</text>
-              <text x="146" y="180" class="body-part-label" style="fill:#3a3a52;font-size:7px;text-anchor:middle;font-family:'JetBrains Mono',monospace">ARM</text>
-              <text x="64" y="248" class="body-part-label" style="fill:#3a3a52;font-size:7px;text-anchor:middle;font-family:'JetBrains Mono',monospace">LEG</text>
-              <text x="96" y="248" class="body-part-label" style="fill:#3a3a52;font-size:7px;text-anchor:middle;font-family:'JetBrains Mono',monospace">LEG</text>
+              <ellipse cx="80" cy="28" rx="22" ry="26" fill="rgba(30,30,50,0.8)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="head" onclick="window._app.selectBodyPart('head','Head & Face')" id="bp-head"/>
+              <rect x="70" y="52" width="20" height="16" rx="4" fill="rgba(30,30,50,0.8)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="neck" onclick="window._app.selectBodyPart('neck','Neck & Throat')" id="bp-neck"/>
+              <ellipse cx="42" cy="80" rx="22" ry="14" fill="rgba(30,30,50,0.8)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="shoulder-l" onclick="window._app.selectBodyPart('shoulder','Shoulders')" id="bp-shoulder-l"/>
+              <ellipse cx="118" cy="80" rx="22" ry="14" fill="rgba(30,30,50,0.8)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="shoulder-r" onclick="window._app.selectBodyPart('shoulder','Shoulders')" id="bp-shoulder-r"/>
+              <path d="M58 68 L48 170 L112 170 L102 68 Z" fill="rgba(30,30,50,0.8)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="torso" onclick="window._app.selectBodyPart('torso','Chest & Torso')" id="bp-torso"/>
+              <path d="M42 88 L28 150 L38 152 L52 90 Z" fill="rgba(30,30,50,0.7)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="arm-l" onclick="window._app.selectBodyPart('arms','Arms & Elbows')" id="bp-arm-l"/>
+              <path d="M118 88 L132 150 L122 152 L108 90 Z" fill="rgba(30,30,50,0.7)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="arm-r" onclick="window._app.selectBodyPart('arms','Arms & Elbows')" id="bp-arm-r"/>
+              <path d="M28 150 L18 210 L30 212 L38 152 Z" fill="rgba(30,30,50,0.65)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="forearm-l" onclick="window._app.selectBodyPart('hands','Hands & Wrists')" id="bp-forearm-l"/>
+              <path d="M132 150 L142 210 L130 212 L122 152 Z" fill="rgba(30,30,50,0.65)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="forearm-r" onclick="window._app.selectBodyPart('hands','Hands & Wrists')" id="bp-forearm-r"/>
+              <ellipse cx="23" cy="220" rx="10" ry="14" fill="rgba(30,30,50,0.7)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="hand-l" onclick="window._app.selectBodyPart('hands','Hands & Wrists')" id="bp-hand-l"/>
+              <ellipse cx="137" cy="220" rx="10" ry="14" fill="rgba(30,30,50,0.7)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="hand-r" onclick="window._app.selectBodyPart('hands','Hands & Wrists')" id="bp-hand-r"/>
+              <path d="M48 168 L44 200 L116 200 L112 168 Z" fill="rgba(30,30,50,0.75)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="hips" onclick="window._app.selectBodyPart('hips','Hips & Pelvis')" id="bp-hips"/>
+              <path d="M56 200 L50 290 L78 290 L80 200 Z" fill="rgba(30,30,50,0.7)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="leg-l" onclick="window._app.selectBodyPart('legs','Legs & Knees')" id="bp-leg-l"/>
+              <path d="M80 200 L82 290 L110 290 L104 200 Z" fill="rgba(30,30,50,0.7)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="leg-r" onclick="window._app.selectBodyPart('legs','Legs & Knees')" id="bp-leg-r"/>
+              <path d="M50 288 L46 340 L74 340 L78 290 Z" fill="rgba(30,30,50,0.65)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="lleg-l" onclick="window._app.selectBodyPart('feet','Feet & Ankles')" id="bp-lleg-l"/>
+              <path d="M82 290 L86 340 L114 340 L110 288 Z" fill="rgba(30,30,50,0.65)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="lleg-r" onclick="window._app.selectBodyPart('feet','Feet & Ankles')" id="bp-lleg-r"/>
+              <ellipse cx="60" cy="350" rx="16" ry="10" fill="rgba(30,30,50,0.7)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="foot-l" onclick="window._app.selectBodyPart('feet','Feet & Ankles')" id="bp-foot-l"/>
+              <ellipse cx="100" cy="350" rx="16" ry="10" fill="rgba(30,30,50,0.7)" stroke="#252535" stroke-width="1.5" class="body-hotspot" data-part="foot-r" onclick="window._app.selectBodyPart('feet','Feet & Ankles')" id="bp-foot-r"/>
+              <text x="80" y="30" style="fill:#3a3a52;font-size:7px;text-anchor:middle;font-family:'JetBrains Mono',monospace">HEAD</text>
+              <text x="80" y="124" style="fill:#3a3a52;font-size:7px;text-anchor:middle;font-family:'JetBrains Mono',monospace">TORSO</text>
+              <text x="14" y="180" style="fill:#3a3a52;font-size:7px;text-anchor:middle;font-family:'JetBrains Mono',monospace">ARM</text>
+              <text x="146" y="180" style="fill:#3a3a52;font-size:7px;text-anchor:middle;font-family:'JetBrains Mono',monospace">ARM</text>
+              <text x="64" y="248" style="fill:#3a3a52;font-size:7px;text-anchor:middle;font-family:'JetBrains Mono',monospace">LEG</text>
+              <text x="96" y="248" style="fill:#3a3a52;font-size:7px;text-anchor:middle;font-family:'JetBrains Mono',monospace">LEG</text>
             </svg>
           </div>
           <div style="font-size:8px;letter-spacing:0.1em;color:var(--text-dim);text-align:center">Click a body region to filter notes</div>
@@ -637,18 +552,18 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
       </div>
     </div>
 
-    <!-- ══ RESOURCES / KNOWLEDGE GRAPH ══ -->
+    <!-- RESOURCES -->
     <div id="panel-resources" class="panel">
       <div class="ph">
         <div><div class="ph-title">KNOWLEDGE <span>GRAPH</span></div><div class="ph-sub">Books & Videos — Visually Connected</div></div>
         <div class="ph-actions">
-          <button class="btn violet" onclick="openAddResource()">+ Add Resource</button>
-          <button class="btn" onclick="kgConnectMode()">Connect Nodes</button>
+          <button class="btn violet" onclick="window._app.openAddResource()">+ Add Resource</button>
+          <button class="btn" onclick="window._app.kgConnectMode()">Connect Nodes</button>
         </div>
       </div>
       <div class="kg-top">
-        <button class="kg-tab active" onclick="switchKgView('graph',this)">Graph View</button>
-        <button class="kg-tab" onclick="switchKgView('grid',this)">Grid View</button>
+        <button class="kg-tab active" onclick="window._app.switchKgView('graph',this)">Graph View</button>
+        <button class="kg-tab" onclick="window._app.switchKgView('grid',this)">Grid View</button>
         <div style="flex:1"></div>
         <div id="kg-stats" style="font-size:9px;letter-spacing:0.1em;color:var(--text-dim)"><span id="kg-node-count">0</span> nodes · <span id="kg-edge-count">0</span> connections</div>
       </div>
@@ -656,29 +571,27 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
         <svg class="kg-svg" id="kg-svg-layer"></svg>
         <div id="kg-nodes-layer" style="position:absolute;inset:0;"></div>
         <div class="kg-toolbar">
-          <button class="kg-tbtn" onclick="kgFitAll()">Fit All</button>
-          <button class="kg-tbtn" onclick="kgAutoLayout()">Auto Layout</button>
+          <button class="kg-tbtn" onclick="window._app.kgFitAll()">Fit All</button>
+          <button class="kg-tbtn" onclick="window._app.kgAutoLayout()">Auto Layout</button>
         </div>
         <div class="kg-info-pill">Drag nodes · <span>Click to select</span> · Double-click to open</div>
         <div id="kg-empty-state" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:var(--text-dim);">
           <div style="font-size:36px;opacity:0.3">🔗</div>
           <div style="font-size:11px;letter-spacing:0.08em;">Add books and YouTube videos to build your knowledge graph</div>
-          <button class="btn violet" onclick="openAddResource()">+ Add First Resource</button>
+          <button class="btn violet" onclick="window._app.openAddResource()">+ Add First Resource</button>
         </div>
       </div>
       <div id="kg-grid-view" style="display:none;">
-        <div class="resource-grid" id="resource-grid">
-          <div style="grid-column:1/-1;font-size:10px;color:var(--text-dim);text-align:center;padding:32px;font-style:italic">No resources yet. Add books or YouTube videos above.</div>
-        </div>
+        <div class="resource-grid" id="resource-grid"></div>
       </div>
     </div>
 
-    <!-- ══ RESEARCH VAULT ══ -->
+    <!-- RESEARCH -->
     <div id="panel-research" class="panel">
       <div class="ph">
         <div><div class="ph-title">RESEARCH <span>VAULT</span></div><div class="ph-sub">Upload Research · Community Validates Credibility</div></div>
         <div class="ph-actions">
-          <button class="btn primary" onclick="openAddResearch()">+ Upload Research</button>
+          <button class="btn primary" onclick="window._app.openAddResearch()">+ Upload Research</button>
         </div>
       </div>
       <div class="grid4" style="margin-bottom:20px">
@@ -693,7 +606,7 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
       </div>
     </div>
 
-    <!-- ══ COMMUNITY ══ -->
+    <!-- COMMUNITY -->
     <div id="panel-community" class="panel">
       <div class="ph">
         <div><div class="ph-title">COMMU<span>NITY</span></div><div class="ph-sub">Live Progress · Shared Learning</div></div>
@@ -702,11 +615,6 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
         <div class="login-box">
           <div class="login-logo">INTELLI<span>GENCE</span></div>
           <div class="login-sub">Select or create your profile</div>
-          <div class="user-profiles" id="user-profiles-grid"></div>
-          <div class="or-divider">or</div>
-          <div class="field"><label>Your Name</label><input type="text" id="new-user-name" placeholder="Enter your name..."></div>
-          <div class="field"><label>Role / Description</label><input type="text" id="new-user-role" placeholder="e.g. Student, Researcher..."></div>
-          <button class="btn primary" style="width:100%;padding:10px" onclick="createProfile()">Create Profile & Join</button>
         </div>
       </div>
       <div id="community-main" style="display:none">
@@ -715,7 +623,7 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
               <div class="cf-avatar" id="my-avatar-big" style="width:40px;height:40px;font-size:14px;"></div>
               <div><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text)" id="my-name-display">—</div><div style="font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim)" id="my-role-display">—</div></div>
-              <button class="btn" style="margin-left:auto;font-size:8px;padding:4px 10px" onclick="signOut()">Sign Out</button>
+              <button class="btn" style="margin-left:auto;font-size:8px;padding:4px 10px" onclick="window._app.signOut()">Sign Out</button>
             </div>
             <div class="cf-stats" id="my-stats-grid">
               <div class="cf-stat"><div class="cf-stat-num" id="stat-sessions">0</div><div class="cf-stat-label">Sessions</div></div>
@@ -737,23 +645,19 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
   </main>
 </div>
 
-<!-- ── Body Language Modal ── -->
+<!-- Modals -->
 <div class="modal-overlay" id="body-modal">
   <div class="modal-box">
     <div class="modal-header">
       <div class="modal-title">ADD BODY NOTE</div>
-      <button class="modal-close" onclick="closeModal('body-modal')">Close</button>
+      <button class="modal-close" onclick="window._app.closeModal('body-modal')">Close</button>
     </div>
     <div class="field"><label>Body Region</label>
       <select id="bm-region">
-        <option value="head">Head & Face</option>
-        <option value="neck">Neck & Throat</option>
-        <option value="shoulder">Shoulders</option>
-        <option value="torso">Chest & Torso</option>
-        <option value="arms">Arms & Elbows</option>
-        <option value="hands">Hands & Wrists</option>
-        <option value="hips">Hips & Pelvis</option>
-        <option value="legs">Legs & Knees</option>
+        <option value="head">Head & Face</option><option value="neck">Neck & Throat</option>
+        <option value="shoulder">Shoulders</option><option value="torso">Chest & Torso</option>
+        <option value="arms">Arms & Elbows</option><option value="hands">Hands & Wrists</option>
+        <option value="hips">Hips & Pelvis</option><option value="legs">Legs & Knees</option>
         <option value="feet">Feet & Ankles</option>
       </select>
     </div>
@@ -768,46 +672,44 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
       </div>
     </div>
     <div class="modal-actions">
-      <button class="btn" onclick="closeModal('body-modal')">Cancel</button>
-      <button class="btn" style="border-color:var(--gold);color:var(--gold)" onclick="saveBodyNote()">Save Note</button>
+      <button class="btn" onclick="window._app.closeModal('body-modal')">Cancel</button>
+      <button class="btn" style="border-color:var(--gold);color:var(--gold)" onclick="window._app.saveBodyNote()">Save Note</button>
     </div>
   </div>
 </div>
 
-<!-- ── Add Resource Modal ── -->
 <div class="modal-overlay" id="resource-modal">
   <div class="modal-box">
     <div class="modal-header">
       <div class="modal-title">ADD RESOURCE</div>
-      <button class="modal-close" onclick="closeModal('resource-modal')">Close</button>
+      <button class="modal-close" onclick="window._app.closeModal('resource-modal')">Close</button>
     </div>
     <div class="add-res-tabs">
-      <div class="art-tab active book" data-type="book" onclick="setResType('book',this)">📚 Book</div>
-      <div class="art-tab video" data-type="video" onclick="setResType('video',this)">▶ YouTube</div>
+      <div class="art-tab active book" data-type="book" onclick="window._app.setResType('book',this)">📚 Book</div>
+      <div class="art-tab video" data-type="video" onclick="window._app.setResType('video',this)">▶ YouTube</div>
     </div>
     <div class="field"><label>Title</label><input type="text" id="rm-title" placeholder="Book or video title..."></div>
     <div class="two-col">
       <div class="field"><label>Author / Channel</label><input type="text" id="rm-author" placeholder="Author or creator..."></div>
       <div class="field"><label>Year / Date</label><input type="text" id="rm-year" placeholder="2024"></div>
     </div>
-    <div class="field" id="rm-link-wrap"><label>YouTube URL</label><input type="url" id="rm-link" placeholder="https://youtube.com/watch?v=..."></div>
+    <div class="field" id="rm-link-wrap" style="display:none"><label>YouTube URL</label><input type="url" id="rm-link" placeholder="https://youtube.com/watch?v=..."></div>
     <div class="field"><label>Upload Thumbnail <span style="font-weight:400;font-style:italic;text-transform:none;letter-spacing:0;color:var(--text-dim)">(optional)</span></label>
       <input type="file" id="rm-thumb" accept="image/*" style="padding:6px 12px;font-size:9px;">
     </div>
     <div class="field"><label>Tags / Topics</label><input type="text" id="rm-tags" placeholder="e.g. psychology, habits, mindset"></div>
     <div class="modal-actions">
-      <button class="btn" onclick="closeModal('resource-modal')">Cancel</button>
-      <button class="btn violet" onclick="saveResource()">Add to Graph</button>
+      <button class="btn" onclick="window._app.closeModal('resource-modal')">Cancel</button>
+      <button class="btn violet" onclick="window._app.saveResource()">Add to Graph</button>
     </div>
   </div>
 </div>
 
-<!-- ── Add Research Modal ── -->
 <div class="modal-overlay" id="research-modal">
   <div class="modal-box">
     <div class="modal-header">
       <div class="modal-title">UPLOAD RESEARCH</div>
-      <button class="modal-close" onclick="closeModal('research-modal')">Close</button>
+      <button class="modal-close" onclick="window._app.closeModal('research-modal')">Close</button>
     </div>
     <div class="field"><label>Research Title</label><input type="text" id="rvm-title" placeholder="Title of your research..."></div>
     <div class="field"><label>Abstract / Summary</label><textarea id="rvm-abstract" rows="4" placeholder="Summarize your findings..."></textarea></div>
@@ -818,36 +720,37 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
     <div class="field"><label>Sources / References</label><textarea id="rvm-sources" rows="2" placeholder="List your sources..."></textarea></div>
     <div class="field"><label>Your Conclusion</label><textarea id="rvm-conclusion" rows="2" placeholder="What did you conclude?"></textarea></div>
     <div class="modal-actions">
-      <button class="btn" onclick="closeModal('research-modal')">Cancel</button>
-      <button class="btn primary" onclick="saveResearch()">Publish Research</button>
+      <button class="btn" onclick="window._app.closeModal('research-modal')">Cancel</button>
+      <button class="btn primary" onclick="window._app.saveResearch()">Publish Research</button>
     </div>
   </div>
 </div>
 
-<!-- ── Connect Nodes Modal ── -->
 <div class="modal-overlay" id="connect-modal">
   <div class="modal-box" style="max-width:400px">
     <div class="modal-header">
       <div class="modal-title">CONNECT NODES</div>
-      <button class="modal-close" onclick="closeModal('connect-modal')">Close</button>
+      <button class="modal-close" onclick="window._app.closeModal('connect-modal')">Close</button>
     </div>
     <div style="font-size:10px;color:var(--text-dim);margin-bottom:14px;letter-spacing:0.04em">Select two resources to connect them in the knowledge graph.</div>
-    <div class="field"><label>Node A</label><select id="cn-node-a" style="margin-bottom:0"></select></div>
-    <div class="field"><label>Node B</label><select id="cn-node-b" style="margin-bottom:0"></select></div>
-    <div class="field"><label>Connection Strength (%)</label><input type="range" id="cn-strength" min="1" max="100" value="65" style="padding:0;background:none;border:none;cursor:pointer;"><div style="text-align:right;font-size:10px;color:var(--violet)" id="cn-strength-display">65%</div></div>
+    <div class="field"><label>Node A</label><select id="cn-node-a"></select></div>
+    <div class="field"><label>Node B</label><select id="cn-node-b"></select></div>
+    <div class="field"><label>Connection Strength (%)</label>
+      <input type="range" id="cn-strength" min="1" max="100" value="65" style="padding:0;background:none;border:none;cursor:pointer;" oninput="document.getElementById('cn-strength-display').textContent=this.value+'%'">
+      <div style="text-align:right;font-size:10px;color:var(--violet)" id="cn-strength-display">65%</div>
+    </div>
     <div class="modal-actions">
-      <button class="btn" onclick="closeModal('connect-modal')">Cancel</button>
-      <button class="btn violet" onclick="saveConnection()">Create Connection</button>
+      <button class="btn" onclick="window._app.closeModal('connect-modal')">Cancel</button>
+      <button class="btn violet" onclick="window._app.saveConnection()">Create Connection</button>
     </div>
   </div>
 </div>
 
-<!-- ── Validation Modal ── -->
 <div class="modal-overlay" id="validate-modal">
   <div class="modal-box" style="max-width:480px">
     <div class="modal-header">
       <div class="modal-title">VALIDATE RESEARCH</div>
-      <button class="modal-close" onclick="closeModal('validate-modal')">Close</button>
+      <button class="modal-close" onclick="window._app.closeModal('validate-modal')">Close</button>
     </div>
     <div id="validate-research-info" style="background:var(--surface2);border:1px solid var(--border);border-radius:3px;padding:12px;margin-bottom:14px;font-size:10px;color:var(--text-dim);letter-spacing:0.04em;line-height:1.7"></div>
     <div class="field"><label>Your Assessment</label>
@@ -857,11 +760,11 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
         <option value="inconclusive">⚠️ Inconclusive — More evidence needed</option>
       </select>
     </div>
-    <div class="field"><label>How did you verify this? (required)</label><textarea id="vm-method" rows="3" placeholder="Describe your verification process, sources you checked, evidence found..."></textarea></div>
+    <div class="field"><label>How did you verify this? (required)</label><textarea id="vm-method" rows="3" placeholder="Describe your verification process..."></textarea></div>
     <div class="field"><label>Your Sources</label><textarea id="vm-sources" rows="2" placeholder="List sources you consulted..."></textarea></div>
     <div class="modal-actions">
-      <button class="btn" onclick="closeModal('validate-modal')">Cancel</button>
-      <button class="btn green" onclick="submitValidation()">Submit Validation</button>
+      <button class="btn" onclick="window._app.closeModal('validate-modal')">Cancel</button>
+      <button class="btn green" onclick="window._app.submitValidation()">Submit Validation</button>
     </div>
   </div>
 </div>
@@ -869,9 +772,6 @@ label{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--t
 <div class="toast" id="toast"></div>
 
 <script type="module">
-// ═══════════════════════════════════
-//  FIREBASE SETUP
-// ═══════════════════════════════════
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getDatabase, ref, set, get, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
@@ -882,16 +782,20 @@ const firebaseConfig = {
   projectId: "intelligence-cc986",
   storageBucket: "intelligence-cc986.firebasestorage.app",
   messagingSenderId: "273854675547",
-  appId: "1:273854675547:web:3594645a7230a22c325d7e",
-  measurementId: "G-7HX9VBXNWD"
+  appId: "1:273854675547:web:3594645a7230a22c325d7e"
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getDatabase(firebaseApp);
 
-// ─── Login Screen ───────────────────────────────────────
+// ─── All public functions exposed via window._app ───────────────────────────
+// This object is populated FIRST so onclick handlers in HTML can always call
+// window._app.X() safely — the module runs before any user interaction.
+window._app = {};
+
 let currentUserId = localStorage.getItem('intel_uid') || null;
 
+// ─── Login ──────────────────────────────────────────────────────────────────
 function showLoginScreen() {
   document.body.insertAdjacentHTML('beforeend', `
     <div id="login-overlay" style="position:fixed;inset:0;background:#04040a;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;font-family:'JetBrains Mono',monospace;">
@@ -901,88 +805,73 @@ function showLoginScreen() {
         <div style="font-size:8px;letter-spacing:0.2em;color:#5a5870;text-transform:uppercase;margin-bottom:4px;">Enter your username to continue</div>
         <input id="login-name-input" type="text" placeholder="Your name (e.g. Alex)" maxlength="20"
           style="font-family:'JetBrains Mono',monospace;font-size:13px;background:#04040a;border:1px solid #1e1e2e;border-radius:3px;color:#c8c8e0;padding:10px 13px;outline:none;letter-spacing:0.06em;"
-          onkeydown="if(event.key==='Enter')window.doLogin()"/>
+          onkeydown="if(event.key==='Enter')window._app.doLogin()"/>
         <div style="display:flex;gap:8px;flex-wrap:wrap;" id="login-color-row">
-          ${['#e63946','#7c6aff','#4cc9f0','#4ade80','#f4a261','#f472b6'].map(c=>`<div onclick="window.selectLoginColor('${c}')" style="width:22px;height:22px;border-radius:50%;background:${c};cursor:pointer;border:2px solid transparent;transition:all 0.15s;" data-color="${c}"></div>`).join('')}
+          ${['#e63946','#7c6aff','#4cc9f0','#4ade80','#f4a261','#f472b6'].map(c=>`<div onclick="window._app.selectLoginColor('${c}')" style="width:22px;height:22px;border-radius:50%;background:${c};cursor:pointer;border:2px solid transparent;transition:all 0.15s;" data-color="${c}"></div>`).join('')}
         </div>
-        <button onclick="window.doLogin()" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;padding:10px;border:1px solid #e63946;background:transparent;color:#e63946;cursor:pointer;border-radius:3px;transition:all 0.15s;"
+        <button onclick="window._app.doLogin()" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;padding:10px;border:1px solid #e63946;background:transparent;color:#e63946;cursor:pointer;border-radius:3px;"
           onmouseover="this.style.background='#e63946';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#e63946'">
           Enter Intelligence
         </button>
         <div id="login-err" style="font-size:9px;color:#e63946;text-align:center;min-height:14px;letter-spacing:0.08em;"></div>
       </div>
     </div>`);
-  // select first color by default
-  window.selectedLoginColor = '#e63946';
-  document.querySelector('#login-color-row [data-color="#e63946"]').style.border = '2px solid #fff';
+  window._app.selectedLoginColor = '#e63946';
+  const firstDot = document.querySelector('#login-color-row [data-color="#e63946"]');
+  if (firstDot) firstDot.style.border = '2px solid #fff';
 }
 
-window.selectLoginColor = function(c) {
-  window.selectedLoginColor = c;
+window._app.selectLoginColor = function(c) {
+  window._app.selectedLoginColor = c;
   document.querySelectorAll('#login-color-row [data-color]').forEach(el => el.style.border = '2px solid transparent');
-  document.querySelector(`#login-color-row [data-color="${c}"]`).style.border = '2px solid #fff';
+  const dot = document.querySelector(`#login-color-row [data-color="${c}"]`);
+  if (dot) dot.style.border = '2px solid #fff';
 };
 
-window.doLogin = async function() {
-  const name = document.getElementById('login-name-input').value.trim();
+window._app.doLogin = async function() {
+  const name = (document.getElementById('login-name-input').value || '').trim();
   if (!name) { document.getElementById('login-err').textContent = 'Please enter a name'; return; }
   const uid = name.toLowerCase().replace(/\s+/g,'_');
-  // Check if user exists in Firebase, create if not
   const userRef = ref(db, `users/${uid}`);
   const snap = await get(userRef);
   if (!snap.exists()) {
     await set(userRef, {
-      id: uid, name, color: window.selectedLoginColor || '#e63946', role: 'Member',
+      id: uid, name, color: window._app.selectedLoginColor || '#e63946', role: 'Member',
       swSessions: [], bodyNotes: [], resources: [], connections: [], research: [], kgPositions: {}
     });
   }
   currentUserId = uid;
   localStorage.setItem('intel_uid', uid);
-  document.getElementById('login-overlay').remove();
+  const overlay = document.getElementById('login-overlay');
+  if (overlay) overlay.remove();
   initApp();
 };
 
-// ─── State ──────────────────────────────────────────────
-let state = {
-  currentUser: null,
-  users: [],
-  swRunning: false,
-  swStartTime: null,
-  swElapsed: 0,
-  swGoal: 0,
-  swGoalLabel: 'Free',
-  swLaps: [],
-  swSessions: [],
-  bodyNotes: [],
-  selectedBodyPart: null,
-  bodyNoteType: 'signal',
-  resources: [],
-  connections: [],
-  kgView: 'graph',
-  resType: 'book',
-  research: [],
-  activeConnectNodeId: null,
-  validateTargetId: null,
-  kgDragging: null,
-  kgDragOffset: {x:0, y:0},
-  kgPositions: {},
+// ─── State ──────────────────────────────────────────────────────────────────
+const state = {
+  currentUser: null, users: [],
+  swRunning: false, swStartTime: null, swElapsed: 0,
+  swGoal: 0, swGoalLabel: 'Free', swLaps: [], swSessions: [],
+  bodyNotes: [], selectedBodyPart: null, bodyNoteType: 'signal',
+  resources: [], connections: [], kgView: 'graph', resType: 'book',
+  research: [], validateTargetId: null,
+  kgDragging: null, kgDragOffset: {x:0,y:0}, kgPositions: {},
 };
 
-// ─── Firebase Sync ───────────────────────────────────────
+// ─── Firebase Sync ──────────────────────────────────────────────────────────
 let _persistTimeout = null;
 function persist() {
   if (!currentUserId) return;
   clearTimeout(_persistTimeout);
   _persistTimeout = setTimeout(() => {
-    const s = {
+    update(ref(db, `users/${currentUserId}`), {
       swSessions: state.swSessions,
       bodyNotes: state.bodyNotes,
       resources: state.resources,
       connections: state.connections,
       research: state.research,
       kgPositions: state.kgPositions,
-    };
-    update(ref(db, `users/${currentUserId}`), s).catch(e => console.error('Firebase write error:', e));
+    }).catch(e => console.error('Firebase write error:', e));
   }, 800);
 }
 
@@ -997,9 +886,9 @@ function listenToUser(uid) {
     state.research = data.research || [];
     state.kgPositions = data.kgPositions || {};
     state.currentUser = { id: data.id, name: data.name, color: data.color, role: data.role };
+    state.resources.forEach(r => updateYtThumb(r));
     updateSwStats(); renderSwSessions(); renderBodyNotes();
     updateTicker(); updateHomeCounts(); updateUserUI();
-    if (state.resources.length) state.resources.forEach(r => updateYtThumb(r));
   });
 }
 
@@ -1015,80 +904,54 @@ function listenToAllUsers() {
 async function initApp() {
   listenToUser(currentUserId);
   listenToAllUsers();
-  updateSwStats(); renderSwSessions(); renderBodyNotes();
-  updateTicker(); updateHomeCounts(); updateUserUI();
 }
 
-// ═══════════════════════════════════
-//  NAV
-// ═══════════════════════════════════
-function switchTab(name, el) {
+// ─── Nav ────────────────────────────────────────────────────────────────────
+window._app.switchTab = function(name, el) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.t-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.nb').forEach(n => n.classList.remove('active'));
   const panel = document.getElementById('panel-' + name);
   if (panel) panel.classList.add('active');
-  if (el && el.classList) {
-    if (el.classList.contains('t-tab')) el.classList.add('active');
-    if (el.classList.contains('nb')) el.classList.add('active');
-  }
-  // Sync sidebar
-  document.querySelectorAll('.nb').forEach(n => {
-    if (n.dataset.panel === name) n.classList.add('active');
-  });
-  // Sync tabs
-  document.querySelectorAll('.t-tab').forEach((t,i) => {
-    const panels = ['home','stopwatch','body','resources','research','community'];
-    if (panels[i] === name) t.classList.add('active');
-  });
-  if (name === 'resources') { setTimeout(kgRender, 50); }
+  document.querySelectorAll('.nb').forEach(n => { if (n.dataset.panel === name) n.classList.add('active'); });
+  const tabOrder = ['home','stopwatch','body','resources','research','community'];
+  document.querySelectorAll('.t-tab').forEach((t, i) => { if (tabOrder[i] === name) t.classList.add('active'); });
+  if (el && el.classList && el.classList.contains('t-tab')) el.classList.add('active');
+  if (el && el.classList && el.classList.contains('nb')) el.classList.add('active');
+  if (name === 'resources') setTimeout(kgRender, 50);
   if (name === 'research') renderResearch();
   if (name === 'community') renderCommunity();
   if (name === 'home') updateHomeCounts();
-}
+};
 
-// ═══════════════════════════════════
-//  CLOCK
-// ═══════════════════════════════════
+// ─── Clock ──────────────────────────────────────────────────────────────────
 function tickClock() {
-  const now = new Date();
-  const s = now.toTimeString().slice(0,8);
   const el = document.getElementById('top-clock');
-  if (el) el.innerHTML = `<strong>${s}</strong>`;
+  if (el) el.innerHTML = `<strong>${new Date().toTimeString().slice(0,8)}</strong>`;
 }
-setInterval(tickClock, 1000);
-tickClock();
+setInterval(tickClock, 1000); tickClock();
 
-// ═══════════════════════════════════
-//  TICKER
-// ═══════════════════════════════════
-(function tickerScroll() {
+// ─── Ticker scroll ──────────────────────────────────────────────────────────
+(function() {
   const track = document.getElementById('ticker-track');
   if (!track) return;
   let x = 0;
-  function step() {
+  (function step() {
     x -= 0.5;
-    const w = track.scrollWidth / 2;
-    if (Math.abs(x) >= w) x = 0;
+    if (Math.abs(x) >= track.scrollWidth / 2) x = 0;
     track.style.transform = `translateX(${x}px)`;
     requestAnimationFrame(step);
-  }
-  step();
+  })();
 })();
 
-// ═══════════════════════════════════
-//  STOPWATCH
-// ═══════════════════════════════════
-let swTimer = null;
-let swMsTimer = null;
+// ─── Stopwatch ──────────────────────────────────────────────────────────────
+let swTimer = null, swMsTimer = null;
 
-function swFmt(ms, showMs = false) {
-  const h = Math.floor(ms / 3600000);
-  const m = Math.floor((ms % 3600000) / 60000);
-  const s = Math.floor((ms % 60000) / 1000);
-  const msec = Math.floor((ms % 1000) / 10);
-  const hms = `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
-  return showMs ? { hms, ms: `.${msec.toString().padStart(2,'0')}` } : hms;
+function swFmt(ms, showMs) {
+  const h = Math.floor(ms/3600000), m = Math.floor((ms%3600000)/60000), s = Math.floor((ms%60000)/1000);
+  const msec = Math.floor((ms%1000)/10);
+  const hms = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  return showMs ? {hms, ms:`.${String(msec).padStart(2,'0')}`} : hms;
 }
 
 function swUpdate() {
@@ -1097,24 +960,20 @@ function swUpdate() {
   const fmt = swFmt(elapsed, true);
   document.getElementById('sw-display').textContent = fmt.hms;
   document.getElementById('sw-ms').textContent = fmt.ms;
-  // Progress ring
   const circle = document.getElementById('sw-prog-circle');
   const dash = 659;
   if (state.swGoal > 0) {
     const pct = Math.min(elapsed / (state.swGoal * 60000), 1);
-    circle.style.strokeDashoffset = dash - (dash * pct);
+    circle.style.strokeDashoffset = dash - dash * pct;
     circle.className = 'sw-prog' + (pct >= 1 ? ' over' : pct >= 0.75 ? ' warn' : '');
   } else {
-    const cycleMs = 60000;
-    const pct = (elapsed % cycleMs) / cycleMs;
-    circle.style.strokeDashoffset = dash - (dash * pct);
+    circle.style.strokeDashoffset = dash - dash * ((elapsed % 60000) / 60000);
   }
 }
 
-function swStartStop() {
+window._app.swStartStop = function() {
   if (!state.swRunning) {
-    state.swRunning = true;
-    state.swStartTime = Date.now();
+    state.swRunning = true; state.swStartTime = Date.now();
     document.getElementById('sw-start-btn').textContent = 'Stop';
     document.getElementById('sw-start-btn').className = 'sw-btn stop';
     document.getElementById('sw-status').textContent = 'RUNNING';
@@ -1132,31 +991,18 @@ function swStartStop() {
     document.getElementById('sw-status').textContent = 'PAUSED';
     document.getElementById('sw-display').className = 'sw-display';
     document.getElementById('sw-ring-wrap').classList.remove('running');
-    // Save session
     if (state.swElapsed > 2000) {
-      state.swSessions.unshift({ id: Date.now(), elapsed: state.swElapsed, goal: state.swGoalLabel, date: new Date().toLocaleDateString(), time: new Date().toLocaleTimeString() });
-      renderSwSessions();
-      updateSwStats();
-      updateTicker();
-      persist();
+      state.swSessions.unshift({id:Date.now(), elapsed:state.swElapsed, goal:state.swGoalLabel, date:new Date().toLocaleDateString(), time:new Date().toLocaleTimeString()});
+      renderSwSessions(); updateSwStats(); updateTicker(); persist();
     }
-    swReset(true);
+    window._app.swReset(true);
   }
-}
+};
 
-function swReset(silent = false) {
-  if (state.swRunning && !silent) {
-    state.swElapsed += Date.now() - state.swStartTime;
-    state.swRunning = false;
-    clearInterval(swTimer); clearInterval(swMsTimer);
-  }
-  state.swElapsed = 0;
-  state.swStartTime = null;
-  state.swLaps = [];
-  if (!silent) {
-    state.swRunning = false;
-    clearInterval(swTimer); clearInterval(swMsTimer);
-  }
+window._app.swReset = function(silent) {
+  if (state.swRunning && !silent) { state.swElapsed += Date.now() - state.swStartTime; }
+  state.swRunning = false; state.swElapsed = 0; state.swStartTime = null; state.swLaps = [];
+  clearInterval(swTimer); clearInterval(swMsTimer);
   document.getElementById('sw-display').textContent = '00:00:00';
   document.getElementById('sw-display').className = 'sw-display';
   document.getElementById('sw-ms').textContent = '.00';
@@ -1168,21 +1014,38 @@ function swReset(silent = false) {
   document.getElementById('sw-start-btn').className = 'sw-btn start';
   document.getElementById('sw-lap-btn').disabled = true;
   renderLaps();
-}
+};
 
-function swLap() {
+window._app.swLap = function() {
   if (!state.swRunning) return;
   const elapsed = state.swElapsed + (Date.now() - state.swStartTime);
   const prev = state.swLaps.length ? state.swLaps[state.swLaps.length-1].elapsed : 0;
-  state.swLaps.push({ n: state.swLaps.length + 1, elapsed, split: elapsed - prev });
+  state.swLaps.push({n: state.swLaps.length+1, elapsed, split: elapsed-prev});
   renderLaps();
-}
+};
 
-function swSetGoal(mins, label) {
-  state.swGoal = mins;
-  state.swGoalLabel = label;
+window._app.swSetGoal = function(mins, label) {
+  state.swGoal = mins; state.swGoalLabel = label;
   document.querySelectorAll('.sw-preset').forEach(b => b.classList.toggle('active', b.textContent.includes(label)));
-}
+};
+
+window._app.swExport = function() {
+  const lines = ['INTELLIGENCE — Stopwatch Log\n','Session,Goal,Duration,Date,Time'];
+  state.swSessions.forEach((s,i) => lines.push(`${i+1},${s.goal},${swFmt(s.elapsed)},${s.date},${s.time}`));
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([lines.join('\n')], {type:'text/csv'}));
+  a.download = 'intelligence-sessions.csv'; a.click();
+};
+
+window._app.swClearAll = function() {
+  if (!confirm('Clear all sessions?')) return;
+  state.swSessions = []; renderSwSessions(); updateSwStats(); persist();
+};
+
+window._app.swDeleteSession = function(id) {
+  state.swSessions = state.swSessions.filter(s => s.id !== id);
+  renderSwSessions(); updateSwStats(); persist();
+};
 
 function renderLaps() {
   const el = document.getElementById('lap-list');
@@ -1199,51 +1062,27 @@ function renderSwSessions() {
       <div><div class="sw-stag">${s.goal}</div></div>
       <div class="sw-sdur">${swFmt(s.elapsed)}</div>
       <div class="sw-sdate">${s.date}<br>${s.time}</div>
-      <button class="sw-sdel" onclick="swDeleteSession(${s.id})">✕</button>
+      <button class="sw-sdel" onclick="window._app.swDeleteSession(${s.id})">✕</button>
     </div>`).join('');
-}
-
-function swDeleteSession(id) {
-  state.swSessions = state.swSessions.filter(s => s.id !== id);
-  renderSwSessions(); updateSwStats(); persist();
 }
 
 function updateSwStats() {
   const total = state.swSessions.reduce((a,s) => a+s.elapsed, 0);
   const today = new Date().toLocaleDateString();
-  const todayTotal = state.swSessions.filter(s => s.date === today).reduce((a,s) => a+s.elapsed, 0);
-  const avg = state.swSessions.length ? Math.round(total / state.swSessions.length) : 0;
-  const fmtH = ms => `${Math.floor(ms/3600000)}h ${Math.floor((ms%3600000)/60000).toString().padStart(2,'0')}m`;
+  const todayTotal = state.swSessions.filter(s => s.date===today).reduce((a,s) => a+s.elapsed, 0);
+  const avg = state.swSessions.length ? Math.round(total/state.swSessions.length) : 0;
+  const fmtH = ms => `${Math.floor(ms/3600000)}h ${String(Math.floor((ms%3600000)/60000)).padStart(2,'0')}m`;
   document.getElementById('sw-total-time').textContent = fmtH(total);
   document.getElementById('sw-session-count').textContent = state.swSessions.length;
   document.getElementById('sw-avg').textContent = avg ? swFmt(avg) : '—';
   document.getElementById('sw-today').textContent = fmtH(todayTotal);
 }
 
-function swExport() {
-  const lines = ['INTELLIGENCE — Stopwatch Log\n', 'Session,Goal,Duration,Date,Time'];
-  state.swSessions.forEach((s,i) => lines.push(`${i+1},${s.goal},${swFmt(s.elapsed)},${s.date},${s.time}`));
-  const blob = new Blob([lines.join('\n')], {type:'text/csv'});
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-  a.download = 'intelligence-sessions.csv'; a.click();
-}
-
-function swClearAll() {
-  if (!confirm('Clear all sessions?')) return;
-  state.swSessions = [];
-  renderSwSessions(); updateSwStats(); persist();
-}
-
-// ═══════════════════════════════════
-//  BODY LANGUAGE
-// ═══════════════════════════════════
-function openBodyModal() {
-  if (state.selectedBodyPart) {
-    const m = {'head':'Head & Face','neck':'Neck & Throat','shoulder':'Shoulders','torso':'Chest & Torso','arms':'Arms & Elbows','hands':'Hands & Wrists','hips':'Hips & Pelvis','legs':'Legs & Knees','feet':'Feet & Ankles'};
-    document.getElementById('bm-region').value = state.selectedBodyPart;
-  }
+// ─── Body Language ──────────────────────────────────────────────────────────
+window._app.openBodyModal = function() {
+  if (state.selectedBodyPart) document.getElementById('bm-region').value = state.selectedBodyPart;
   openModal('body-modal');
-}
+};
 
 document.querySelectorAll('#bm-type-chips .signal-chip').forEach(c => {
   c.addEventListener('click', function() {
@@ -1253,23 +1092,24 @@ document.querySelectorAll('#bm-type-chips .signal-chip').forEach(c => {
   });
 });
 
-function selectBodyPart(partKey, label) {
+window._app.selectBodyPart = function(partKey, label) {
   state.selectedBodyPart = partKey;
   document.getElementById('body-selected-title').textContent = label;
-  document.querySelectorAll('.body-hotspot').forEach(el => el.classList.remove('active'));
-  const partAttr = el => el.dataset.part === partKey || el.dataset.part.startsWith(partKey);
-  document.querySelectorAll('.body-hotspot').forEach(el => { if (el.dataset.part === partKey || el.dataset.part.startsWith(partKey) || el.dataset.part.endsWith(partKey)) el.classList.add('active'); });
-  // Highlight the correct region with gold stroke
   document.querySelectorAll('.body-hotspot').forEach(el => {
     const dp = el.dataset.part;
-    const match = dp === partKey || (partKey === 'shoulder' && dp.startsWith('shoulder')) || (partKey === 'arms' && dp.startsWith('arm-')) || (partKey === 'hands' && (dp.startsWith('hand-') || dp.startsWith('forearm'))) || (partKey === 'legs' && dp.startsWith('leg-')) || (partKey === 'feet' && (dp.startsWith('foot-') || dp.startsWith('lleg-')));
+    const match = dp === partKey
+      || (partKey==='shoulder' && dp.startsWith('shoulder'))
+      || (partKey==='arms' && dp.startsWith('arm-'))
+      || (partKey==='hands' && (dp.startsWith('hand-') || dp.startsWith('forearm')))
+      || (partKey==='legs' && dp.startsWith('leg-'))
+      || (partKey==='feet' && (dp.startsWith('foot-') || dp.startsWith('lleg-')));
     el.setAttribute('stroke', match ? '#f4a261' : '#252535');
     el.style.opacity = match ? '1' : '0.5';
   });
   renderBodyNotes();
-}
+};
 
-function saveBodyNote() {
+window._app.saveBodyNote = function() {
   const title = document.getElementById('bm-title').value.trim();
   if (!title) { showToast('Title required', 'err'); return; }
   const note = {
@@ -1283,10 +1123,14 @@ function saveBodyNote() {
   document.getElementById('bm-title').value = '';
   document.getElementById('bm-desc').value = '';
   renderBodyNotes();
-  addActivity(`Body note added: "${note.title}" (${note.region})`, '#f4a261');
-  updateTicker(); persist();
-  showToast('Note saved', 'ok');
-}
+  addActivity(`Body note added: "${note.title}"`, '#f4a261');
+  updateTicker(); persist(); showToast('Note saved', 'ok');
+};
+
+window._app.deleteBodyNote = function(id) {
+  state.bodyNotes = state.bodyNotes.filter(n => n.id !== id);
+  renderBodyNotes(); updateTicker(); persist();
+};
 
 function renderBodyNotes() {
   const el = document.getElementById('body-notes-list');
@@ -1294,11 +1138,11 @@ function renderBodyNotes() {
   if (state.selectedBodyPart) {
     const pk = state.selectedBodyPart;
     notes = notes.filter(n => {
-      if (pk === 'shoulder' && n.region === 'shoulder') return true;
-      if (pk === 'arms' && n.region === 'arms') return true;
-      if (pk === 'hands' && n.region === 'hands') return true;
-      if (pk === 'legs' && n.region === 'legs') return true;
-      if (pk === 'feet' && n.region === 'feet') return true;
+      if (pk==='shoulder' && n.region==='shoulder') return true;
+      if (pk==='arms' && n.region==='arms') return true;
+      if (pk==='hands' && n.region==='hands') return true;
+      if (pk==='legs' && n.region==='legs') return true;
+      if (pk==='feet' && n.region==='feet') return true;
       return n.region === pk;
     });
   }
@@ -1311,151 +1155,123 @@ function renderBodyNotes() {
       <div class="body-note-meta">
         <span class="body-note-tag ${typeColor[n.type]||'bn-signal'}">${n.type}</span>
         <span style="font-size:8px;color:var(--text-dim);letter-spacing:0.08em">${n.region} · ${n.date}</span>
-        <button onclick="deleteBodyNote(${n.id})" style="float:right;background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:10px;opacity:0.3;transition:all 0.15s" onmouseover="this.style.opacity=1;this.style.color='var(--accent)'" onmouseout="this.style.opacity=0.3;this.style.color='var(--text-dim)'">✕</button>
+        <button onclick="window._app.deleteBodyNote(${n.id})" style="float:right;background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:10px;opacity:0.4" onmouseover="this.style.opacity=1;this.style.color='var(--accent)'" onmouseout="this.style.opacity=0.4;this.style.color='var(--text-dim)'">✕</button>
       </div>
       ${n.desc ? `<div style="font-size:9px;color:var(--text-dim);margin-top:6px;line-height:1.7;border-left:2px solid var(--border2);padding-left:8px">${n.desc}</div>` : ''}
     </div>`).join('');
 }
 
-function deleteBodyNote(id) {
-  state.bodyNotes = state.bodyNotes.filter(n => n.id !== id);
-  renderBodyNotes(); updateTicker(); persist();
-}
-
-// ═══════════════════════════════════
-//  RESOURCES / KNOWLEDGE GRAPH
-// ═══════════════════════════════════
-let resType = 'book';
-
-function setResType(type, el) {
-  resType = type;
+// ─── Resources / Knowledge Graph ────────────────────────────────────────────
+window._app.setResType = function(type, el) {
+  state.resType = type;
   document.querySelectorAll('.art-tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('rm-link-wrap').style.display = type === 'video' ? 'block' : 'none';
-}
+};
 
-function openAddResource() {
-  document.getElementById('rm-title').value = '';
-  document.getElementById('rm-author').value = '';
-  document.getElementById('rm-year').value = '';
-  document.getElementById('rm-link').value = '';
-  document.getElementById('rm-tags').value = '';
+window._app.openAddResource = function() {
+  ['rm-title','rm-author','rm-year','rm-link','rm-tags'].forEach(id => { document.getElementById(id).value = ''; });
   openModal('resource-modal');
-}
+};
 
-function saveResource() {
+window._app.saveResource = function() {
   const title = document.getElementById('rm-title').value.trim();
   if (!title) { showToast('Title required', 'err'); return; }
-  const fileInput = document.getElementById('rm-thumb');
-  const file = fileInput.files[0];
+  const file = document.getElementById('rm-thumb').files[0];
   if (file) {
     const reader = new FileReader();
-    reader.onload = e => {
-      addResourceObj(title, e.target.result);
-    };
+    reader.onload = e => addResourceObj(title, e.target.result);
     reader.readAsDataURL(file);
   } else {
     addResourceObj(title, null);
   }
-}
+};
 
 function addResourceObj(title, thumbData) {
   const node = {
-    id: Date.now(),
-    type: resType,
-    title,
+    id: Date.now(), type: state.resType, title,
     author: document.getElementById('rm-author').value.trim(),
     year: document.getElementById('rm-year').value.trim(),
     link: document.getElementById('rm-link').value.trim(),
     tags: document.getElementById('rm-tags').value.trim(),
     thumb: thumbData,
-    x: 80 + Math.random() * 600,
-    y: 60 + Math.random() * 320,
+    x: 80 + Math.random() * 600, y: 60 + Math.random() * 320,
   };
   state.resources.push(node);
   state.kgPositions[node.id] = {x: node.x, y: node.y};
   closeModal('resource-modal');
   document.getElementById('rm-thumb').value = '';
   updateYtThumb(node);
-  kgRender();
-  renderResourceGrid();
-  updateKgStats();
+  kgRender(); renderResourceGrid(); updateKgStats();
   addActivity(`Resource added: "${node.title}" (${node.type})`, '#7c6aff');
-  updateTicker(); persist();
-  showToast('Resource added to graph', 'ok');
+  updateTicker(); persist(); showToast('Resource added to graph', 'ok');
 }
 
 function updateYtThumb(node) {
-  if (node.type === 'video' && node.link && !node.thumb) {
-    const match = node.link.match(/[?&]v=([^&]+)/) || node.link.match(/youtu\.be\/([^?]+)/);
-    if (match) node.thumb = `https://img.youtube.com/vi/${match[1]}/mqdefault.jpg`;
+  if (node.type==='video' && node.link && !node.thumb) {
+    const m = node.link.match(/[?&]v=([^&]+)/) || node.link.match(/youtu\.be\/([^?]+)/);
+    if (m) node.thumb = `https://img.youtube.com/vi/${m[1]}/mqdefault.jpg`;
   }
 }
 
-function switchKgView(view, el) {
+// *** THE MISSING FUNCTION — this was causing the crash ***
+window._app.deleteResource = function(id) {
+  state.resources = state.resources.filter(r => r.id !== id);
+  state.connections = state.connections.filter(c => c.a !== id && c.b !== id);
+  delete state.kgPositions[id];
+  kgRender(); renderResourceGrid(); updateKgStats(); updateTicker(); persist();
+  showToast('Resource removed', 'ok');
+};
+
+window._app.switchKgView = function(view, el) {
   state.kgView = view;
   document.querySelectorAll('.kg-tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
-  document.getElementById('kg-graph-view').style.display = view === 'graph' ? 'block' : 'none';
-  document.getElementById('kg-grid-view').style.display = view === 'grid' ? 'block' : 'none';
-  if (view === 'graph') kgRender();
-  else renderResourceGrid();
-}
+  document.getElementById('kg-graph-view').style.display = view==='graph' ? 'block' : 'none';
+  document.getElementById('kg-grid-view').style.display = view==='grid' ? 'block' : 'none';
+  if (view==='graph') kgRender(); else renderResourceGrid();
+};
 
 function kgRender() {
   const nodesLayer = document.getElementById('kg-nodes-layer');
   const svgLayer = document.getElementById('kg-svg-layer');
   const emptyState = document.getElementById('kg-empty-state');
   if (!nodesLayer) return;
-  nodesLayer.innerHTML = '';
-  svgLayer.innerHTML = '';
+  nodesLayer.innerHTML = ''; svgLayer.innerHTML = '';
   emptyState.style.display = state.resources.length ? 'none' : 'flex';
   if (!state.resources.length) return;
-  // Draw SVG connections
   const svgNS = 'http://www.w3.org/2000/svg';
   state.connections.forEach(c => {
-    const a = state.resources.find(r => r.id === c.a);
-    const b = state.resources.find(r => r.id === c.b);
+    const a = state.resources.find(r => r.id===c.a), b = state.resources.find(r => r.id===c.b);
     if (!a || !b) return;
-    const ax = (state.kgPositions[a.id]||{x:a.x,y:a.y}).x + 36;
-    const ay = (state.kgPositions[a.id]||{x:a.x,y:a.y}).y + 25;
-    const bx = (state.kgPositions[b.id]||{x:b.x,y:b.y}).x + 36;
-    const by = (state.kgPositions[b.id]||{x:b.x,y:b.y}).y + 25;
-    const line = document.createElementNS(svgNS, 'line');
-    line.setAttribute('x1', ax); line.setAttribute('y1', ay);
-    line.setAttribute('x2', bx); line.setAttribute('y2', by);
-    line.setAttribute('class', 'kg-line');
-    svgLayer.appendChild(line);
-    // Percentage label
-    const tx = (ax+bx)/2, ty = (ay+by)/2;
-    const label = document.createElementNS(svgNS, 'text');
-    label.setAttribute('x', tx); label.setAttribute('y', ty);
-    label.setAttribute('text-anchor','middle'); label.setAttribute('fill','#44445c');
-    label.setAttribute('font-size','9'); label.setAttribute('font-family','JetBrains Mono, monospace');
-    label.textContent = `${c.strength}%`;
-    svgLayer.appendChild(label);
+    const pa = state.kgPositions[a.id]||{x:a.x,y:a.y}, pb = state.kgPositions[b.id]||{x:b.x,y:b.y};
+    const line = document.createElementNS(svgNS,'line');
+    line.setAttribute('x1',pa.x+36); line.setAttribute('y1',pa.y+25);
+    line.setAttribute('x2',pb.x+36); line.setAttribute('y2',pb.y+25);
+    line.setAttribute('class','kg-line'); svgLayer.appendChild(line);
+    const lbl = document.createElementNS(svgNS,'text');
+    lbl.setAttribute('x',(pa.x+pb.x)/2+36); lbl.setAttribute('y',(pa.y+pb.y)/2+25);
+    lbl.setAttribute('text-anchor','middle'); lbl.setAttribute('fill','#44445c');
+    lbl.setAttribute('font-size','9'); lbl.setAttribute('font-family','JetBrains Mono,monospace');
+    lbl.textContent = `${c.strength}%`; svgLayer.appendChild(lbl);
   });
-  // Draw nodes
   state.resources.forEach(node => {
-    const pos = state.kgPositions[node.id] || {x: node.x, y: node.y};
-    const connCount = state.connections.filter(c => c.a === node.id || c.b === node.id).length;
+    const pos = state.kgPositions[node.id]||{x:node.x,y:node.y};
+    const connCount = state.connections.filter(c => c.a===node.id||c.b===node.id).length;
     const el = document.createElement('div');
-    el.className = 'kg-node';
-    el.dataset.id = node.id;
-    el.style.left = pos.x + 'px';
-    el.style.top = pos.y + 'px';
+    el.className = 'kg-node'; el.dataset.id = node.id;
+    el.style.left = pos.x+'px'; el.style.top = pos.y+'px';
     const thumbHtml = node.thumb
-      ? `<img src="${node.thumb}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=\\'res-thumb-placeholder\\'>${node.type==='book'?'📚':'▶'}</div>'">`
+      ? `<img src="${node.thumb}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'">`
       : `<div class="res-thumb-placeholder">${node.type==='book'?'📚':'▶'}</div>`;
     el.innerHTML = `
       <div class="kg-node-thumb ${node.type}-type">
         ${thumbHtml}
         ${connCount > 0 ? `<div class="kg-node-count">${connCount}</div>` : ''}
       </div>
-      <div class="kg-node-label">${node.title.length > 14 ? node.title.slice(0,14)+'…' : node.title}</div>`;
-    // Drag
+      <div class="kg-node-label">${node.title.length>14 ? node.title.slice(0,14)+'…' : node.title}</div>`;
     el.addEventListener('mousedown', e => kgDragStart(e, node.id));
-    el.addEventListener('dblclick', () => { if (node.link) window.open(node.link, '_blank'); });
+    el.addEventListener('dblclick', () => { if (node.link) window.open(node.link,'_blank'); });
     nodesLayer.appendChild(el);
   });
   updateKgStats();
@@ -1463,22 +1279,21 @@ function kgRender() {
 
 function kgDragStart(e, id) {
   e.preventDefault();
-  const el = document.querySelector(`.kg-node[data-id="${id}"]`);
-  const wrap = document.getElementById('kg-nodes-layer');
-  const wRect = document.getElementById('kg-graph-view').getBoundingClientRect();
-  const nRect = el.getBoundingClientRect();
+  const wrap = document.getElementById('kg-graph-view');
+  const wRect = wrap.getBoundingClientRect();
+  const nRect = e.currentTarget.getBoundingClientRect();
   state.kgDragging = id;
-  state.kgDragOffset = { x: e.clientX - nRect.left, y: e.clientY - nRect.top };
+  state.kgDragOffset = {x: e.clientX-nRect.left, y: e.clientY-nRect.top};
   function onMove(ev) {
     if (!state.kgDragging) return;
-    const x = ev.clientX - wRect.left - state.kgDragOffset.x;
-    const y = ev.clientY - wRect.top - state.kgDragOffset.y;
-    state.kgPositions[state.kgDragging] = { x: Math.max(0, x), y: Math.max(0, y) };
+    state.kgPositions[state.kgDragging] = {
+      x: Math.max(0, ev.clientX-wRect.left-state.kgDragOffset.x),
+      y: Math.max(0, ev.clientY-wRect.top-state.kgDragOffset.y)
+    };
     kgRender();
   }
   function onUp() {
-    state.kgDragging = null;
-    persist();
+    state.kgDragging = null; persist();
     document.removeEventListener('mousemove', onMove);
     document.removeEventListener('mouseup', onUp);
   }
@@ -1486,59 +1301,50 @@ function kgDragStart(e, id) {
   document.addEventListener('mouseup', onUp);
 }
 
-function kgFitAll() {
+window._app.kgFitAll = function() {
   if (!state.resources.length) return;
   const wrap = document.getElementById('kg-graph-view');
-  const w = wrap.clientWidth - 100, h = wrap.clientHeight - 80;
+  const w = wrap.clientWidth-100, h = wrap.clientHeight-80;
   const cols = Math.ceil(Math.sqrt(state.resources.length));
   state.resources.forEach((r, i) => {
-    const col = i % cols, row = Math.floor(i / cols);
-    const x = 50 + col * (w / cols);
-    const y = 50 + row * (h / Math.ceil(state.resources.length / cols));
-    state.kgPositions[r.id] = {x, y};
-  });
-  kgRender(); persist();
-}
-
-function kgAutoLayout() {
-  if (!state.resources.length) return;
-  const wrap = document.getElementById('kg-graph-view');
-  const cx = wrap.clientWidth / 2, cy = wrap.clientHeight / 2;
-  const r = Math.min(cx, cy) * 0.7;
-  state.resources.forEach((node, i) => {
-    const angle = (i / state.resources.length) * Math.PI * 2 - Math.PI / 2;
-    state.kgPositions[node.id] = {
-      x: cx + Math.cos(angle) * r - 36,
-      y: cy + Math.sin(angle) * r - 25
+    state.kgPositions[r.id] = {
+      x: 50 + (i%cols)*(w/cols),
+      y: 50 + Math.floor(i/cols)*(h/Math.ceil(state.resources.length/cols))
     };
   });
   kgRender(); persist();
-}
+};
 
-function kgConnectMode() {
-  if (state.resources.length < 2) { showToast('Need at least 2 resources to connect', 'err'); return; }
-  const selA = document.getElementById('cn-node-a');
-  const selB = document.getElementById('cn-node-b');
-  selA.innerHTML = state.resources.map(r => `<option value="${r.id}">${r.title}</option>`).join('');
-  selB.innerHTML = state.resources.map(r => `<option value="${r.id}">${r.title}</option>`).join('');
+window._app.kgAutoLayout = function() {
+  if (!state.resources.length) return;
+  const wrap = document.getElementById('kg-graph-view');
+  const cx = wrap.clientWidth/2, cy = wrap.clientHeight/2;
+  const r = Math.min(cx,cy)*0.7;
+  state.resources.forEach((node, i) => {
+    const angle = (i/state.resources.length)*Math.PI*2-Math.PI/2;
+    state.kgPositions[node.id] = {x: cx+Math.cos(angle)*r-36, y: cy+Math.sin(angle)*r-25};
+  });
+  kgRender(); persist();
+};
+
+window._app.kgConnectMode = function() {
+  if (state.resources.length < 2) { showToast('Need at least 2 resources', 'err'); return; }
+  const selA = document.getElementById('cn-node-a'), selB = document.getElementById('cn-node-b');
+  const opts = state.resources.map(r => `<option value="${r.id}">${r.title}</option>`).join('');
+  selA.innerHTML = opts; selB.innerHTML = opts;
   if (state.resources.length > 1) selB.selectedIndex = 1;
-  document.getElementById('cn-strength').oninput = function() {
-    document.getElementById('cn-strength-display').textContent = this.value + '%';
-  };
   openModal('connect-modal');
-}
+};
 
-function saveConnection() {
+window._app.saveConnection = function() {
   const a = parseInt(document.getElementById('cn-node-a').value);
   const b = parseInt(document.getElementById('cn-node-b').value);
-  if (a === b) { showToast('Select two different nodes', 'err'); return; }
-  const existing = state.connections.find(c => (c.a===a&&c.b===b)||(c.a===b&&c.b===a));
-  if (existing) { showToast('Connection already exists', 'err'); return; }
-  state.connections.push({ id: Date.now(), a, b, strength: parseInt(document.getElementById('cn-strength').value) });
-  closeModal('connect-modal');
-  kgRender(); updateKgStats(); updateTicker(); persist();
+  if (a===b) { showToast('Select two different nodes', 'err'); return; }
+  if (state.connections.find(c => (c.a===a&&c.b===b)||(c.a===b&&c.b===a))) { showToast('Connection already exists', 'err'); return; }
+  state.connections.push({id:Date.now(), a, b, strength: parseInt(document.getElementById('cn-strength').value)});
+  closeModal('connect-modal'); kgRender(); updateKgStats(); updateTicker(); persist();
   showToast('Connection created', 'ok');
-}
+};
 
 function updateKgStats() {
   document.getElementById('kg-node-count').textContent = state.resources.length;
@@ -1551,48 +1357,43 @@ function renderResourceGrid() {
   el.innerHTML = state.resources.map(r => {
     const connCount = state.connections.filter(c => c.a===r.id||c.b===r.id).length;
     const thumbHtml = r.thumb ? `<img src="${r.thumb}" onerror="this.parentElement.innerHTML='<div class=\\'res-thumb-placeholder\\'>${r.type==='book'?'📚':'▶'}</div>'">` : `<div class="res-thumb-placeholder">${r.type==='book'?'📚':'▶'}</div>`;
-    return `<div class="res-card" ${r.link ? `onclick="window.open('${r.link}','_blank')"` : ''}>
+    return `<div class="res-card" ${r.link?`onclick="window.open('${r.link}','_blank')"`:''}">
       <div class="res-thumb">${thumbHtml}<span class="res-type-badge ${r.type==='book'?'rt-book':'rt-video'}">${r.type}</span></div>
       <div class="res-body">
         <div class="res-title">${r.title}</div>
-        <div class="res-meta">${r.author}${r.year ? ' · '+r.year : ''}</div>
-        ${connCount > 0 ? `<div class="res-connections">🔗 ${connCount} connection${connCount>1?'s':''}</div>` : ''}
-        ${r.tags ? `<div style="margin-top:6px;font-size:8px;color:var(--text-dim);letter-spacing:0.06em">${r.tags}</div>` : ''}
+        <div class="res-meta">${r.author}${r.year?' · '+r.year:''}</div>
+        ${connCount>0?`<div class="res-connections">🔗 ${connCount} connection${connCount>1?'s':''}</div>`:''}
+        ${r.tags?`<div style="margin-top:6px;font-size:8px;color:var(--text-dim);letter-spacing:0.06em">${r.tags}</div>`:''}
+        <button onclick="event.stopPropagation();window._app.deleteResource(${r.id})" style="margin-top:8px;background:none;border:1px solid rgba(230,57,70,0.3);color:var(--accent);border-radius:2px;font-size:8px;letter-spacing:0.1em;padding:3px 8px;cursor:pointer;font-family:inherit;text-transform:uppercase">Remove</button>
       </div>
     </div>`;
   }).join('');
 }
 
-// ═══════════════════════════════════
-//  RESEARCH VAULT
-// ═══════════════════════════════════
-function openAddResearch() { openModal('research-modal'); }
+// ─── Research ────────────────────────────────────────────────────────────────
+window._app.openAddResearch = function() { openModal('research-modal'); };
 
-function saveResearch() {
+window._app.saveResearch = function() {
   const title = document.getElementById('rvm-title').value.trim();
   const abstract = document.getElementById('rvm-abstract').value.trim();
   if (!title || !abstract) { showToast('Title and abstract required', 'err'); return; }
   const paper = {
-    id: Date.now(),
-    title, abstract,
+    id: Date.now(), title, abstract,
     field: document.getElementById('rvm-field').value.trim(),
     method: document.getElementById('rvm-method').value.trim(),
     sources: document.getElementById('rvm-sources').value.trim(),
     conclusion: document.getElementById('rvm-conclusion').value.trim(),
     author: state.currentUser ? state.currentUser.name : 'Anonymous',
     date: new Date().toLocaleDateString(),
-    status: 'pending',
-    votes: { up: 0, down: 0 },
-    validations: [],
-    userVotes: {},
+    status: 'pending', votes: {up:0,down:0}, validations: [], userVotes: {},
   };
   state.research.unshift(paper);
   closeModal('research-modal');
-  document.querySelectorAll('#research-modal input, #research-modal textarea').forEach(el => el.value = '');
+  document.querySelectorAll('#research-modal input, #research-modal textarea').forEach(el => el.value='');
   renderResearch(); updateTicker(); persist();
   addActivity(`Research uploaded: "${paper.title}"`, '#e63946');
   showToast('Research published', 'ok');
-}
+};
 
 function renderResearch() {
   const el = document.getElementById('research-list');
@@ -1603,103 +1404,86 @@ function renderResearch() {
   el.innerHTML = state.research.map(p => {
     const uid = state.currentUser ? state.currentUser.id : 'anon';
     const voted = p.userVotes[uid];
-    const credPct = p.votes.up + p.votes.down > 0 ? Math.round((p.votes.up / (p.votes.up + p.votes.down)) * 100) : 50;
-    return `
-    <div class="research-card" id="rc-${p.id}">
+    const credPct = p.votes.up+p.votes.down > 0 ? Math.round((p.votes.up/(p.votes.up+p.votes.down))*100) : 50;
+    return `<div class="research-card" id="rc-${p.id}">
       <div class="rc-top">
-        <div><div class="rc-title">${p.title}</div><div style="font-size:9px;color:var(--text-dim);margin-top:4px;letter-spacing:0.06em">${p.author} · ${p.date}${p.field ? ' · '+p.field : ''}</div></div>
-        <div class="rc-badges">
-          <span class="rcb ${statusClass[p.status]||'rcb-pending'}">${p.status}</span>
-          ${p.method ? `<span class="rcb" style="color:var(--text-dim);border-color:var(--border2)">${p.method}</span>` : ''}
-        </div>
+        <div><div class="rc-title">${p.title}</div><div style="font-size:9px;color:var(--text-dim);margin-top:4px;letter-spacing:0.06em">${p.author} · ${p.date}${p.field?' · '+p.field:''}</div></div>
+        <div class="rc-badges"><span class="rcb ${statusClass[p.status]||'rcb-pending'}">${p.status}</span>${p.method?`<span class="rcb" style="color:var(--text-dim);border-color:var(--border2)">${p.method}</span>`:''}</div>
       </div>
       <div class="rc-body">${p.abstract}</div>
-      ${p.conclusion ? `<div style="font-size:9px;color:var(--cyan);letter-spacing:0.06em;margin-bottom:10px;padding-left:14px;border-left:2px solid rgba(76,201,240,0.3)"><strong>Conclusion:</strong> ${p.conclusion}</div>` : ''}
+      ${p.conclusion?`<div style="font-size:9px;color:var(--cyan);letter-spacing:0.06em;margin-bottom:10px;padding-left:14px;border-left:2px solid rgba(76,201,240,0.3)"><strong>Conclusion:</strong> ${p.conclusion}</div>`:''}
       <div class="credibility-bar"><div class="cred-fill" style="width:${credPct}%;background:${credColor[p.status]||'var(--gold)'}"></div></div>
       <div class="rc-meta" style="margin-top:8px">
         <span class="rc-meta-item">Credibility: <strong style="color:${credColor[p.status]||'var(--gold)'}">${credPct}%</strong></span>
         <span class="rc-meta-item">${p.validations.length} validation${p.validations.length!==1?'s':''}</span>
         <div class="rc-votes">
-          <button class="vote-btn ${voted==='up'?'voted-up':''}" onclick="voteResearch(${p.id},'up')">✓ Valid ${p.votes.up}</button>
-          <button class="vote-btn down ${voted==='down'?'voted-down':''}" onclick="voteResearch(${p.id},'down')">✗ Disputed ${p.votes.down}</button>
-          <button class="btn" style="font-size:8px;padding:4px 10px;border-color:var(--cyan);color:var(--cyan)" onclick="openValidate(${p.id})">Validate</button>
+          <button class="vote-btn ${voted==='up'?'voted-up':''}" onclick="window._app.voteResearch(${p.id},'up')">✓ Valid ${p.votes.up}</button>
+          <button class="vote-btn down ${voted==='down'?'voted-down':''}" onclick="window._app.voteResearch(${p.id},'down')">✗ Disputed ${p.votes.down}</button>
+          <button class="btn" style="font-size:8px;padding:4px 10px;border-color:var(--cyan);color:var(--cyan)" onclick="window._app.openValidate(${p.id})">Validate</button>
         </div>
       </div>
-      <button class="rc-expand" onclick="toggleRcComments(${p.id},this)">Show Validations <span style="display:inline-block;transition:transform 0.25s">▼</span></button>
+      <button class="rc-expand" onclick="window._app.toggleRcComments(${p.id},this)">Show Validations <span style="display:inline-block;transition:transform 0.25s">▼</span></button>
       <div class="rc-comments" id="rc-comments-${p.id}">
         ${p.validations.length ? p.validations.map(v => {
-          const vc = {verified:'var(--green)',disputed:'var(--accent)',inconclusive:'var(--text-muted)'}[v.verdict] || 'var(--violet)';
-          return `<div class="comment-row">
-            <div class="comment-avatar" style="background:${vc}">${(v.validator||'?').charAt(0).toUpperCase()}</div>
-            <div class="comment-body">
-              <div class="comment-name" style="color:${vc}">${v.validator} · ${v.verdict} · ${v.date}</div>
-              <div class="comment-text">${v.method}</div>
-              ${v.sources ? `<div style="font-size:9px;color:var(--text-dim);margin-top:4px;letter-spacing:0.04em">Sources: ${v.sources}</div>` : ''}
-            </div>
-          </div>`;
-        }).join('') : '<div style="font-size:10px;color:var(--text-dim);font-style:italic">No validations yet. Be the first to verify this research.</div>'}
+          const vc = {verified:'var(--green)',disputed:'var(--accent)',inconclusive:'var(--text-muted)'}[v.verdict]||'var(--violet)';
+          return `<div class="comment-row"><div class="comment-avatar" style="background:${vc}">${(v.validator||'?').charAt(0).toUpperCase()}</div><div class="comment-body"><div class="comment-name" style="color:${vc}">${v.validator} · ${v.verdict} · ${v.date}</div><div class="comment-text">${v.method}</div>${v.sources?`<div style="font-size:9px;color:var(--text-dim);margin-top:4px">Sources: ${v.sources}</div>`:''}</div></div>`;
+        }).join('') : '<div style="font-size:10px;color:var(--text-dim);font-style:italic">No validations yet.</div>'}
       </div>
     </div>`;
   }).join('');
 }
 
-function toggleRcComments(id, btn) {
+window._app.toggleRcComments = function(id, btn) {
   const c = document.getElementById('rc-comments-'+id);
   c.classList.toggle('open');
   const arrow = btn.querySelector('span');
   if (arrow) arrow.style.transform = c.classList.contains('open') ? 'rotate(180deg)' : '';
-}
+};
 
-function voteResearch(id, type) {
-  const p = state.research.find(r => r.id === id);
+window._app.voteResearch = function(id, type) {
+  const p = state.research.find(r => r.id===id);
   if (!p) return;
   const uid = state.currentUser ? state.currentUser.id : 'anon';
-  if (p.userVotes[uid] === type) { delete p.userVotes[uid]; p.votes[type] = Math.max(0, p.votes[type]-1); }
+  if (p.userVotes[uid]===type) { delete p.userVotes[uid]; p.votes[type]=Math.max(0,p.votes[type]-1); }
   else {
-    if (p.userVotes[uid]) p.votes[p.userVotes[uid]] = Math.max(0, p.votes[p.userVotes[uid]]-1);
-    p.votes[type]++; p.userVotes[uid] = type;
+    if (p.userVotes[uid]) p.votes[p.userVotes[uid]]=Math.max(0,p.votes[p.userVotes[uid]]-1);
+    p.votes[type]++; p.userVotes[uid]=type;
   }
-  updateResearchStatus(p);
-  renderResearch(); persist();
-}
+  updateResearchStatus(p); renderResearch(); persist();
+};
 
 function updateResearchStatus(p) {
   const total = p.votes.up + p.votes.down + p.validations.length;
-  if (total === 0) { p.status = 'pending'; return; }
-  const verPct = (p.votes.up + p.validations.filter(v=>v.verdict==='verified').length) / total;
-  const disPct = (p.votes.down + p.validations.filter(v=>v.verdict==='disputed').length) / total;
-  if (verPct >= 0.6) p.status = 'verified';
-  else if (disPct >= 0.5) p.status = 'disputed';
-  else p.status = 'inconclusive';
+  if (!total) { p.status='pending'; return; }
+  const verPct = (p.votes.up+p.validations.filter(v=>v.verdict==='verified').length)/total;
+  const disPct = (p.votes.down+p.validations.filter(v=>v.verdict==='disputed').length)/total;
+  p.status = verPct>=0.6 ? 'verified' : disPct>=0.5 ? 'disputed' : 'inconclusive';
 }
 
-function openValidate(id) {
+window._app.openValidate = function(id) {
   state.validateTargetId = id;
-  const p = state.research.find(r => r.id === id);
+  const p = state.research.find(r => r.id===id);
   if (!p) return;
   document.getElementById('validate-research-info').innerHTML = `<strong style="color:var(--text)">${p.title}</strong><br><span style="color:var(--text-dim)">${p.abstract.slice(0,200)}${p.abstract.length>200?'…':''}</span>`;
   document.getElementById('vm-method').value = '';
   document.getElementById('vm-sources').value = '';
   openModal('validate-modal');
-}
+};
 
-function submitValidation() {
+window._app.submitValidation = function() {
   const method = document.getElementById('vm-method').value.trim();
   if (!method) { showToast('Please describe your verification method', 'err'); return; }
-  const p = state.research.find(r => r.id === state.validateTargetId);
+  const p = state.research.find(r => r.id===state.validateTargetId);
   if (!p) return;
   p.validations.push({
-    id: Date.now(),
-    verdict: document.getElementById('vm-verdict').value,
+    id: Date.now(), verdict: document.getElementById('vm-verdict').value,
     method, sources: document.getElementById('vm-sources').value.trim(),
     validator: state.currentUser ? state.currentUser.name : 'Anonymous',
     date: new Date().toLocaleDateString()
   });
-  updateResearchStatus(p);
-  closeModal('validate-modal');
-  renderResearch(); persist();
+  updateResearchStatus(p); closeModal('validate-modal'); renderResearch(); persist();
   showToast('Validation submitted', 'ok');
-}
+};
 
 function updateResearchStats() {
   document.getElementById('rv-total').textContent = state.research.length;
@@ -1708,54 +1492,22 @@ function updateResearchStats() {
   document.getElementById('rv-pending').textContent = state.research.filter(r=>r.status==='pending').length;
 }
 
-// ═══════════════════════════════════
-//  COMMUNITY
-// ═══════════════════════════════════
-
+// ─── Community ───────────────────────────────────────────────────────────────
 function renderCommunity() {
-  const loginSection = document.getElementById('login-section');
-  const mainSection = document.getElementById('community-main');
   if (state.currentUser) {
-    loginSection.style.display = 'none';
-    mainSection.style.display = 'block';
-    renderMyProfile();
-    renderAllMembers();
+    document.getElementById('login-section').style.display = 'none';
+    document.getElementById('community-main').style.display = 'block';
+    renderMyProfile(); renderAllMembers();
   } else {
-    loginSection.style.display = 'flex';
-    mainSection.style.display = 'none';
+    document.getElementById('login-section').style.display = 'flex';
+    document.getElementById('community-main').style.display = 'none';
   }
 }
 
-function loginAs(uid) { /* disabled - using Firebase login */ }
-function createProfile() { /* disabled - using Firebase login */ }
-
-function signOut() {
+window._app.signOut = function() {
   localStorage.removeItem('intel_uid');
-  currentUserId = null;
   location.reload();
-}
-window.logoutUser = signOut;
-
-function openUserModal() {
-  if (!state.currentUser) return;
-  document.getElementById('um-name').value = state.currentUser.name;
-  document.getElementById('um-role').value = state.currentUser.role || '';
-  openModal('user-modal');
-}
-window.openUserModal = openUserModal;
-
-function saveUserProfile() {
-  const name = document.getElementById('um-name').value.trim();
-  if (!name) { showToast('Name required','err'); return; }
-  const role = document.getElementById('um-role').value.trim() || 'Member';
-  state.currentUser.name = name;
-  state.currentUser.role = role;
-  update(ref(db, `users/${currentUserId}`), { name, role });
-  updateUserUI();
-  closeModal('user-modal');
-  showToast('Profile updated','ok');
-}
-window.saveUserProfile = saveUserProfile;
+};
 
 function updateUserUI() {
   const avatarEl = document.getElementById('user-avatar-top');
@@ -1766,33 +1518,28 @@ function updateUserUI() {
     nameEl.textContent = state.currentUser.name;
   } else {
     avatarEl.textContent = '?';
-    avatarEl.style.background = 'linear-gradient(135deg,var(--violet),var(--cyan))';
     nameEl.textContent = 'Sign In';
   }
 }
 
 function renderMyProfile() {
-  const u = state.currentUser;
-  if (!u) return;
-  const avatarEl = document.getElementById('my-avatar-big');
-  avatarEl.textContent = u.name.charAt(0).toUpperCase();
-  avatarEl.style.background = u.color;
+  const u = state.currentUser; if (!u) return;
+  const big = document.getElementById('my-avatar-big');
+  big.textContent = u.name.charAt(0).toUpperCase(); big.style.background = u.color;
   document.getElementById('my-name-display').textContent = u.name;
-  document.getElementById('my-role-display').textContent = u.role;
-  // Stats
+  document.getElementById('my-role-display').textContent = u.role || 'Member';
   document.getElementById('stat-sessions').textContent = state.swSessions.length;
   document.getElementById('stat-resources').textContent = state.resources.length;
   document.getElementById('stat-research').textContent = state.research.filter(r=>r.author===u.name).length;
   document.getElementById('stat-notes').textContent = state.bodyNotes.length;
-  // Progress bars
   const totalMs = state.swSessions.reduce((a,s)=>a+s.elapsed,0);
   const bars = [
-    {label:'Study Time', pct: Math.min(Math.round(totalMs/36000), 100), color:'var(--cyan)'},
-    {label:'Resources', pct: Math.min(state.resources.length*10, 100), color:'var(--violet)'},
-    {label:'Research', pct: Math.min(state.research.length*20, 100), color:'var(--accent)'},
-    {label:'Body Notes', pct: Math.min(state.bodyNotes.length*10, 100), color:'var(--gold)'},
+    {label:'Study Time', pct:Math.min(Math.round(totalMs/36000),100), color:'var(--cyan)'},
+    {label:'Resources', pct:Math.min(state.resources.length*10,100), color:'var(--violet)'},
+    {label:'Research', pct:Math.min(state.research.length*20,100), color:'var(--accent)'},
+    {label:'Body Notes', pct:Math.min(state.bodyNotes.length*10,100), color:'var(--gold)'},
   ];
-  document.getElementById('my-progress-bars').innerHTML = bars.map(b => `
+  document.getElementById('my-progress-bars').innerHTML = bars.map(b=>`
     <div class="cf-prog-row">
       <div class="cf-prog-label">${b.label}</div>
       <div class="cf-prog-bar"><div class="cf-prog-fill" style="width:${b.pct}%;background:${b.color}"></div></div>
@@ -1802,18 +1549,12 @@ function renderMyProfile() {
 
 function renderAllMembers() {
   const el = document.getElementById('community-feed');
-  const allUsers = state.users; // real Firebase users (excludes self)
-  if (!allUsers.length) {
-    el.innerHTML = '<div style="font-size:10px;color:var(--text-dim);font-style:italic;text-align:center;padding:20px">No other members yet. Share the link with your friend!</div>';
-    return;
-  }
-  el.innerHTML = allUsers.map(u => {
-    const sessions = (u.swSessions||[]).length;
-    const resources = (u.resources||[]).length;
-    const research = (u.research||[]).length;
-    const notes = (u.bodyNotes||[]).length;
-    const totalMs = (u.swSessions||[]).reduce((a,s)=>a+(s.elapsed||0),0);
-    const study = `${Math.floor(totalMs/3600000)}h ${Math.floor((totalMs%3600000)/60000)}m`;
+  if (!el) return;
+  if (!state.users.length) { el.innerHTML = '<div style="font-size:10px;color:var(--text-dim);font-style:italic;text-align:center;padding:20px">No other members yet. Share the link with a friend!</div>'; return; }
+  el.innerHTML = state.users.map(u => {
+    const sessions=(u.swSessions||[]).length, resources=(u.resources||[]).length, research=(u.research||[]).length, notes=(u.bodyNotes||[]).length;
+    const totalMs=(u.swSessions||[]).reduce((a,s)=>a+(s.elapsed||0),0);
+    const study=`${Math.floor(totalMs/3600000)}h ${String(Math.floor((totalMs%3600000)/60000)).padStart(2,'0')}m`;
     return `<div class="cf-user-card" style="border-color:${u.color||'var(--border)'}">
       <div class="cf-user-top">
         <div class="cf-avatar" style="background:${u.color||'#7c6aff'}">${u.name.charAt(0).toUpperCase()}</div>
@@ -1827,107 +1568,69 @@ function renderAllMembers() {
         <div class="cf-stat"><div class="cf-stat-num">${notes}</div><div class="cf-stat-label">Notes</div></div>
       </div>
       <div class="cf-progress-section">
-        ${[
-          {l:'Study', p:Math.min(Math.round(totalMs/36000),100), c:u.color||'var(--cyan)'},
-          {l:'Resources', p:Math.min(resources*10,100), c:u.color||'var(--violet)'},
-          {l:'Research', p:Math.min(research*15,100), c:u.color||'var(--accent)'}
-        ].map(b=>`<div class="cf-prog-row"><div class="cf-prog-label">${b.l}</div><div class="cf-prog-bar"><div class="cf-prog-fill" style="width:${b.p}%;background:${b.c}"></div></div><div class="cf-prog-pct">${b.p}%</div></div>`).join('')}
+        ${[{l:'Study',p:Math.min(Math.round(totalMs/36000),100),c:u.color||'var(--cyan)'},{l:'Resources',p:Math.min(resources*10,100),c:u.color||'var(--violet)'},{l:'Research',p:Math.min(research*15,100),c:u.color||'var(--accent)'}]
+          .map(b=>`<div class="cf-prog-row"><div class="cf-prog-label">${b.l}</div><div class="cf-prog-bar"><div class="cf-prog-fill" style="width:${b.p}%;background:${b.c}"></div></div><div class="cf-prog-pct">${b.p}%</div></div>`).join('')}
       </div>
       <div style="font-size:8px;color:var(--text-dim);letter-spacing:0.08em;text-align:right;margin-top:8px">Study total: ${study}</div>
     </div>`;
   }).join('');
 }
 
-// ═══════════════════════════════════
-//  UTILS
-// ═══════════════════════════════════
+// ─── Utils ───────────────────────────────────────────────────────────────────
 function openModal(id) { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+window._app.openModal = openModal;
+window._app.closeModal = closeModal;
 
-function showToast(msg, type = '') {
+function showToast(msg, type) {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show' + (type ? ' '+type : '');
-  setTimeout(() => t.className = 'toast', 2500);
+  t.textContent = msg; t.className = 'toast show' + (type?' '+type:'');
+  setTimeout(() => t.className='toast', 2500);
 }
 
 function addActivity(text, color) {
   const feed = document.getElementById('activity-feed');
   if (!feed) return;
-  const time = new Date().toLocaleTimeString();
   const row = document.createElement('div');
   row.className = 'feed-row';
-  row.innerHTML = `<div class="feed-dot" style="background:${color}"></div><span class="feed-text">${text}</span><span class="feed-time">${time}</span>`;
+  row.innerHTML = `<div class="feed-dot" style="background:${color}"></div><span class="feed-text">${text}</span><span class="feed-time">${new Date().toLocaleTimeString()}</span>`;
   feed.insertBefore(row, feed.firstChild);
   while (feed.children.length > 8) feed.removeChild(feed.lastChild);
 }
 
 function updateTicker() {
   const totalMs = state.swSessions.reduce((a,s) => a+s.elapsed, 0);
-  const h = Math.floor(totalMs/3600000), m = Math.floor((totalMs%3600000)/60000);
-  const fmt = `${h}h ${m.toString().padStart(2,'0')}m`;
-  ['tk-total-sw','tk-total-sw2'].forEach(id => { const el=document.getElementById(id); if(el) el.textContent=fmt; });
-  ['tk-body-count','tk-body-count2'].forEach(id => { const el=document.getElementById(id); if(el) el.textContent=state.bodyNotes.length; });
-  ['tk-res-count','tk-res-count2'].forEach(id => { const el=document.getElementById(id); if(el) el.textContent=state.resources.length; });
-  ['tk-research-count'].forEach(id => { const el=document.getElementById(id); if(el) el.textContent=state.research.length; });
-  document.getElementById('tk-stat-sw').textContent = state.swSessions.length;
-  document.getElementById('tk-stat-res').textContent = state.resources.length;
-  document.getElementById('tk-stat-research').textContent = state.research.length;
+  const h=Math.floor(totalMs/3600000), m=Math.floor((totalMs%3600000)/60000);
+  const fmt=`${h}h ${String(m).padStart(2,'0')}m`;
+  ['tk-total-sw','tk-total-sw2'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=fmt;});
+  ['tk-body-count','tk-body-count2'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=state.bodyNotes.length;});
+  ['tk-res-count','tk-res-count2'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=state.resources.length;});
+  const rce=document.getElementById('tk-research-count'); if(rce) rce.textContent=state.research.length;
+  document.getElementById('tk-stat-sw').textContent=state.swSessions.length;
+  document.getElementById('tk-stat-res').textContent=state.resources.length;
+  document.getElementById('tk-stat-research').textContent=state.research.length;
 }
 
 function updateHomeCounts() {
-  document.getElementById('home-sw-count').textContent = state.swSessions.length + ' sessions';
-  document.getElementById('home-body-count').textContent = state.bodyNotes.length + ' notes';
-  document.getElementById('home-res-count').textContent = state.resources.length + ' items';
-  document.getElementById('home-research-count').textContent = state.research.length + ' papers';
+  document.getElementById('home-sw-count').textContent=state.swSessions.length+' sessions';
+  document.getElementById('home-body-count').textContent=state.bodyNotes.length+' notes';
+  document.getElementById('home-res-count').textContent=state.resources.length+' items';
+  document.getElementById('home-research-count').textContent=state.research.length+' papers';
 }
 
 // Close modals on overlay click
 document.querySelectorAll('.modal-overlay').forEach(ov => {
-  ov.addEventListener('click', e => { if (e.target === ov) ov.classList.remove('open'); });
+  ov.addEventListener('click', e => { if (e.target===ov) ov.classList.remove('open'); });
 });
 
-// ═══════════════════════════════════
-//  INIT
-// ═══════════════════════════════════
+// ─── Init ────────────────────────────────────────────────────────────────────
 if (currentUserId) {
   initApp();
 } else {
   showLoginScreen();
 }
-
-// Expose functions needed by inline HTML onclick handlers
-window.switchTab = switchTab;
-window.swStartStop = swStartStop;
-window.swReset = swReset;
-window.swLap = swLap;
-window.swSetGoal = swSetGoal;
-window.swExport = swExport;
-window.swClearAll = swClearAll;
-window.swDeleteSession = swDeleteSession;
-window.openBodyModal = openBodyModal;
-window.selectBodyPart = selectBodyPart;
-window.saveBodyNote = saveBodyNote;
-window.deleteBodyNote = deleteBodyNote;
-window.openAddResource = openAddResource;
-window.saveResource = saveResource;
-window.setResType = setResType;
-window.switchKgView = switchKgView;
-window.kgFitAll = kgFitAll;
-window.kgAutoLayout = kgAutoLayout;
-window.kgConnectMode = kgConnectMode;
-window.saveConnection = saveConnection;
-window.deleteResource = deleteResource;
-window.openAddResearch = openAddResearch;
-window.saveResearch = saveResearch;
-window.voteResearch = voteResearch;
-window.openValidate = openValidate;
-window.submitValidation = submitValidation;
-window.openModal = openModal;
-window.closeModal = closeModal;
-window.openUserModal = openUserModal;
-window.saveUserProfile = saveUserProfile;
-window.logoutUser = logoutUser;
 </script>
 </body>
 </html>
+HTMLEOF
+echo "Done: $(wc -c < /mnt/user-data/outputs/intelligence_fixed.html) bytes"
